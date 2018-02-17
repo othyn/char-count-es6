@@ -38,7 +38,7 @@ module.exports = env => {
         entry: path.resolve('./src/char-count.js'),
         devtool: 'source-map',
         output: {
-            path: path.resolve('./dist'),
+            path: outputPath,
             filename: outputFile,
             library: 'char-count',
             libraryTarget: 'umd',
