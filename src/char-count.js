@@ -1,4 +1,4 @@
-export default class CharCount() {
+export default class CharCount {
 
     constructor() {
 
