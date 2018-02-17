@@ -4,7 +4,10 @@
   "description": "A lightweight ES6 library for dealing with character counts on text fields",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --env dev --progress --colors --hide-modules --display-error-details",
+    "watch": "webpack --env dev --progress --colors --hide-modules --watch",
+    "hot": "webpack-dev-server --inline --hot",
+    "prod": "webpack --env prod --no-progress --hide-modules"
   },
   "repository": {
     "type": "git",
