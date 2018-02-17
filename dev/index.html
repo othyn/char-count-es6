@@ -21,25 +21,43 @@
 
             <div class="py-5 text-center">
 
-                <h2>Char Count Dev Area</h2>
+                <h1>Char Count Dev Area</h1>
 
-                <p class="lead">Below are some test fields that can be used for... well, testing. So go, ahead and get testing!</p>
+                <p class="lead">Below are some test fields that can be used for... well, testing. So, go ahead and get testing!</p>
 
             </div>
 
             <form>
 
-                <h4>Example Form</h4>
+                <h4>Example Text Fields</h4>
 
                 <div class="form-group my-4">
                     <label for="example-text-field">Example Text Field</label>
-                    <input type="text" class="form-control" id="example-text-field" placeholder="Type some text in here...">
+                    <input type="text" class="form-control" id="example-text-field">
                 </div>
                 <!-- Test text field -->
 
                 <div class="form-group">
+                    <label for="example-text-field-max">Example Text Field</label>
+                    <input type="text" class="form-control" id="example-text-field-max" maxlength="10">
+                    <small class="text-muted">maxlength = 10</small>
+                </div>
+                <!-- Test text field -->
+
+                <hr class="my-5">
+
+                <h4>Example Text Areas</h4>
+
+                <div class="form-group my-4">
                     <label for="example-text-area">Example Text Area</label>
                     <textarea class="form-control" id="example-text-area" rows="5"></textarea>
+                </div>
+                <!-- Test text area -->
+
+                <div class="form-group">
+                    <label for="example-text-area-max">Example Text Area</label>
+                    <textarea class="form-control" id="example-text-area-max" rows="5" maxlength="10"></textarea>
+                    <small class="text-muted">maxlength = 10</small>
                 </div>
                 <!-- Test text area -->
 
