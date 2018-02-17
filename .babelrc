@@ -1,0 +1,4 @@
+{
+    "presets": ["env"]
+    // Automatically set plugins, etc. based on environment
+}
