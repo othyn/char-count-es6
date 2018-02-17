@@ -1,3 +1,7 @@
+// Auto generated:
+// $ npm install -g eslint
+// $ eslint init
+// Follow the onscreen instructions...
 {
     "env": {
         "browser": true,
