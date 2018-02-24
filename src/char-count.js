@@ -123,6 +123,7 @@ export default class CharCount {
     handleInputEvent(event) {
 
         this.calculateRemainingCharacters(event.target);
+        // Hand off event element to calculate the remaining characters
     }
 
     /**
