@@ -143,7 +143,6 @@ export default class CharCount {
         // Get the next element to check for counters existence
         // TODO - Allow for elements that aren't situated directly below field
 
-        if (potentialFieldCounter === null || !potentialFieldCounter.matches(this.countClass)) {
 
             this.createFieldCounter(field);
             // Create field counter if there isn't one on the DOM
