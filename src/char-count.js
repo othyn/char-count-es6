@@ -13,11 +13,41 @@ export default class CharCount {
         limit = 100,
         warning = 25,
         danger = 10,
+        // Threshold values
 
         fieldClass = 'cc-field',
         countClass = 'cc-count',
+        // DOM interaction classes
 
-        goneOver = false
+        // Callbacks
+        // Spent well over an hour trying to research good practice for this
+        // behaviour in ES6/etc. as it was fairly common in jQuery for options
+        // but I don't know whether to repeat this behaviour. At the moment,
+        // its the only way I can think of implementing the required functionality.
+        // Would like to find some libraries as reference to see how this has been
+        // done by other devs, or I am welcome to discuss other methods of implementation
+        // for this if another method is more efficient/best practice.
+
+        onFieldEmpty = (field) => {},
+        // Fired when a fields text count is zero; not entirely sure on its continued usefulness
+
+        onFieldWarningReached = (field, count) => {},
+        // Fired when the warning character count threshold is reached
+
+        onFieldWarningWithdrawn = (field, count) => {},
+        // Fired after the character count returns to below that of the warning threshold
+
+        onFieldDangerReached = (field, count) => {},
+        // Fired when the danger character count threshold is reached
+
+        onFieldDangerWithdrawn = (field, count) => {},
+        // Fired after the character count returns to below that of the warning threshold
+
+        onFieldLimitReached = (field, count) => {},
+        // Fired when the limit character count threshold is reached
+
+        onFieldLimitWithdrawn = (field, count) => {}
+        // Fired after the character count returns to below that of the limit threshold
 
     } = {}) {
 
@@ -27,11 +57,13 @@ export default class CharCount {
         this.limit = limit;
         this.warning = warning;
         this.danger = danger;
+        // Setup threshold values
 
         this.fieldClass = fieldClass;
         this.countClass = countClass;
+        // Setup DOM interaction classes
 
-        this.goneOver = goneOver;
+        this.onFieldEmpty = onFieldEmpty;
 
         // this.bindFields()
     }
@@ -64,35 +96,4 @@ export default class CharCount {
 
     // updateFieldCounter(field) {}
     // Update internal character count for the field
-
-
-    // Events / Callbacks
-    // Not sure what to call these. Spent well over an hour trying to research good
-    // practice for this behaviour in ES6/etc. as it was common in jQuery but I don't
-    // know whether to repeat this behaviour. At the moment, its the only way I can
-    // think of implementing the required functionality. Would like to find some
-    // libraries as reference to see how this has been done by other devs.
-    //
-    // Naming needs consideration on the withdrawn events, don't like onField<Threshold>Withdrawn
-
-    // onFieldEmpty(callback = (field) => {}) {}
-    // Fired when a fields text count is zero; not entirely sure on its continued usefulness
-
-    // onFieldWarningReached(callback = (field, count) => {}) {}
-    // Fired when the warning character count threshold is reached
-
-    // onFieldWarningWithdrawn(callback = (field, count) => {}) {}
-    // Fired after the character count returns to below that of the warning threshold
-
-    // onFieldDangerReached(callback = (field, count) => {}) {}
-    // Fired when the danger character count threshold is reached
-
-    // onFieldDangerWithdrawn(callback = (field, count) => {}) {}
-    // Fired after the character count returns to below that of the warning threshold
-
-    // onFieldLimitReached(callback = (field, count) => {}) {}
-    // Fired when the limit character count threshold is reached
-
-    // onFieldLimitWithdrawn(callback = (field, count) => {}) {}
-    // Fired after the character count returns to below that of the limit threshold
 }
