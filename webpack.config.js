@@ -11,11 +11,15 @@ module.exports = env => {
     // As I need to use env, webpack needs to be defined as a function
 
     let plugins = [],
+        entry = '',
         outputFile = ''
         outputPath = '';
     // Store build options
 
     if (env === 'prod') {
+
+        entry = path.resolve('./src/char-count.js');
+        // Build lib
 
         plugins.push(new UglifyJsPlugin({ minimize: true }));
         // Minify on prod build
@@ -26,16 +30,19 @@ module.exports = env => {
 
     } else {
 
+        entry = path.resolve('./src/example.app.js');
+        // Build example app
+
         plugins.push(new HotModuleReplacementPlugin());
         // Hot module reloading in dev server
 
-        outputFile = 'char-count.js';
+        outputFile = 'example.app.js';
         outputPath = path.resolve('./dev');
         // Dev build location/file
     }
 
     return {
-        entry: path.resolve('./src/char-count.js'),
+        entry: entry,
         devtool: 'source-map',
         output: {
             path: outputPath,
