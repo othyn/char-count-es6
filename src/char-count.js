@@ -64,6 +64,13 @@ export default class CharCount {
         // Setup DOM interaction classes
 
         this.onFieldEmpty = onFieldEmpty;
+        this.onFieldWarningReached = onFieldWarningReached;
+        this.onFieldWarningWithdrawn = onFieldWarningWithdrawn;
+        this.onFieldDangerReached = onFieldDangerReached;
+        this.onFieldDangerWithdrawn = onFieldDangerWithdrawn;
+        this.onFieldLimitReached = onFieldLimitReached;
+        this.onFieldLimitWithdrawn = onFieldLimitWithdrawn;
+        // Register callbacks
 
         // this.bindFields()
     }
