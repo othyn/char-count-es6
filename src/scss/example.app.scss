@@ -1,0 +1,13 @@
+// These styles assume Bootstrap 4
+// So make amendments as necessary...
+
+@import 'variables';
+// Application variables
+
+.#{$default-counter-class} {
+    display: block;
+    text-align: right;
+    margin-top: 5px;
+    transition: color .2s ease-in-out;
+    background: linear-gradient(#e98a00, #f5aa2f);
+}
