@@ -72,7 +72,8 @@ export default class CharCount {
         this.onFieldLimitWithdrawn = onFieldLimitWithdrawn;
         // Register callbacks
 
-        // this.bindFields()
+        this.bindFields();
+        // Bind the class to the defined DOM interaction classes
     }
 
 
@@ -87,20 +88,58 @@ export default class CharCount {
     // Put colouring options in the constructor and/or as getters/setters?
 
 
-    // Core functionality
+    /**
+     * Core functionality
+     */
 
-    // bindFields() {}
-    // Binds listener events to the fields, needs to fire initial count for bound fields?
-    // Initialise an instance of the class for each field OR
-    // OR follow a singleton pattern and have an internal store for instantiated fields and their state?
-    // OR does that even matter as the event listener itself can return the bound field as part of the event firing?
+    /**
+     * Binds listener events to the fields with the configured class
+     * @return void
+     */
+    bindFields() {
 
-    // calculateRemainingCharacters(field) {}
-    // Calculates remaining characters but will also need to fire callbacks
+        let elements = document.getElementsByClassName(this.fieldClass);
+        // Pull all DOM elements to initialise into an HTMLCollection
 
-    // createFieldCounter(field) {}
-    // Generate the markup to be placed under the field, allow templating?
+        if (Object.keys(elements).length === 0)
+            return console.warn('CharCount: No elements initialised');
+        // Check for elements on DOM
 
-    // updateFieldCounter(field) {}
-    // Update internal character count for the field
+        Array.from(elements, el => {
+            el.addEventListener('input', this.calculateRemainingCharacters);
+        });
+        // Register the event listener to the DOM elements required
+        // TODO - May need to add multiple event listeners, see how it goes
+        // https://stackoverflow.com/questions/8796988/binding-multiple-events-to-a-listener-without-jquery#comment49312823_27029689
+    }
+
+    /**
+     * Calculates remaining characters but will also need to fire callbacks
+     * @param  {[type]} field [description]
+     * @return {[type]}       [description]
+     */
+    calculateRemainingCharacters(field) {
+
+        console.log('calculateRemainingCharacters');
+    }
+
+    /**
+     * Generate the markup to be placed under the field, allow templating?
+     * @param  {[type]} field [description]
+     * @return {[type]}       [description]
+     */
+    createFieldCounter(field) {
+
+        console.log('createFieldCounter');
+    }
+
+    /**
+     * Update internal character count for the field
+     * @param  {[type]} field [description]
+     * @return {[type]}       [description]
+     */
+    updateFieldCounter(field) {
+
+        console.log('updateFieldCounter');
+    }
 }
