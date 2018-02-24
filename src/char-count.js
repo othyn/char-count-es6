@@ -106,11 +106,26 @@ export default class CharCount {
         // Check for elements on DOM
 
         Array.from(elements, el => {
-            el.addEventListener('input', this.calculateRemainingCharacters);
+
+            el.addEventListener('input', this.handleInputEvent.bind(this));
+            // Register the event listener to the DOM elements required
+            // TODO - May need to add multiple event listeners, see how it goes
+            // https://stackoverflow.com/questions/8796988/binding-multiple-events-to-a-listener-without-jquery#comment49312823_27029689
+
+            this.calculateRemainingCharacters(el);
+            // Calculate initial counts for each element
         });
-        // Register the event listener to the DOM elements required
-        // TODO - May need to add multiple event listeners, see how it goes
-        // https://stackoverflow.com/questions/8796988/binding-multiple-events-to-a-listener-without-jquery#comment49312823_27029689
+
+    }
+
+    /**
+     * Initial handler of the event, mainly to pass the element object on to calculateRemainingCharacters
+     * @param  object   event   JS event
+     * @return {[type]}
+     */
+    handleInputEvent(event) {
+
+        this.calculateRemainingCharacters(event.target);
     }
 
     /**
@@ -120,7 +135,10 @@ export default class CharCount {
      */
     calculateRemainingCharacters(field) {
 
-        console.log('calculateRemainingCharacters');
+        field.cc_remaining_characters = (this.limit - field.value.length);
+        // Perform count on the field against the limit
+
+        console.log(field.cc_remaining_characters);
     }
 
     /**
