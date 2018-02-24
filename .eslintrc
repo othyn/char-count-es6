@@ -32,6 +32,11 @@
             "error", {
                 "args": "none"
             }
+        ],
+        "no-console": [
+            "error", {
+                "allow": ["log", "warn", "error"]
+            }
         ]
     }
 }
