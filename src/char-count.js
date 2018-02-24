@@ -157,13 +157,15 @@ export default class CharCount {
     /**
      * Generate the markup to be placed under the field, allow templating?
      * @param  object   field   JS element object
-     * @return {[type]}
+     * @return void
      */
     createFieldCounter(field) {
 
         let counterMarkup = `<small class="${this.countClass}">${field.cc_remaining_characters}</small>`;
+        // Generate counter markup
 
-        console.log(counterMarkup);
+        field.insertAdjacentHTML('afterend', counterMarkup);
+        // Insert the counter after the field in question
     }
 
     /**
