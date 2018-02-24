@@ -3,3 +3,8 @@ node_modules
 
 # macOS
 .DS_Store
+
+# dev
+/dev/*.js
+/dev/*.css
+/dev/*.map
