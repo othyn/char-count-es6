@@ -118,7 +118,7 @@ export default class CharCount {
     /**
      * Initial handler of the event, mainly to pass the element object on to calculateRemainingCharacters
      * @param  object   event   JS event
-     * @return {[type]}
+     * @return void
      */
     handleInputEvent(event) {
 
@@ -129,7 +129,7 @@ export default class CharCount {
     /**
      * Calculates remaining characters but will also need to fire callbacks
      * @param  object   field   JS element object
-     * @return {[type]}
+     * @return void
      */
     calculateRemainingCharacters(field) {
 
@@ -174,7 +174,7 @@ export default class CharCount {
      * Update internal character count for the fields counter
      * @param  object   field          JS element object
      * @param  object   fieldCounter   JS element object
-     * @return {[type]}
+     * @return void
      */
     updateFieldCounter(field, fieldCounter) {
 
