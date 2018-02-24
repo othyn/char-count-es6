@@ -5,7 +5,7 @@ export default class CharCount {
 
     /**
      * constructor
-     * @param  object Config to initialise the class with
+     * @param  object   Config to initialise the class with
      * @return void
      */
     constructor({
@@ -115,8 +115,8 @@ export default class CharCount {
 
     /**
      * Calculates remaining characters but will also need to fire callbacks
-     * @param  {[type]} field [description]
-     * @return {[type]}       [description]
+     * @param  object   field   JS element object
+     * @return {[type]}
      */
     calculateRemainingCharacters(field) {
 
@@ -125,8 +125,8 @@ export default class CharCount {
 
     /**
      * Generate the markup to be placed under the field, allow templating?
-     * @param  {[type]} field [description]
-     * @return {[type]}       [description]
+     * @param  object   field   JS element object
+     * @return {[type]}
      */
     createFieldCounter(field) {
 
@@ -135,8 +135,8 @@ export default class CharCount {
 
     /**
      * Update internal character count for the field
-     * @param  {[type]} field [description]
-     * @return {[type]}       [description]
+     * @param  object   field   JS element object
+     * @return {[type]}
      */
     updateFieldCounter(field) {
 
