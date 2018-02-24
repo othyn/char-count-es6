@@ -150,7 +150,7 @@ export default class CharCount {
 
         } else {
 
-            this.updateFieldCounter(potentialFieldCounter);
+            this.updateFieldCounter(field, potentialFieldCounter);
             // Update the existing DOM field counter
         }
     }
@@ -171,11 +171,13 @@ export default class CharCount {
 
     /**
      * Update internal character count for the fields counter
+     * @param  object   field          JS element object
      * @param  object   fieldCounter   JS element object
      * @return {[type]}
      */
-    updateFieldCounter(fieldCounter) {
+    updateFieldCounter(field, fieldCounter) {
 
-        console.log('updateFieldCounter');
+        fieldCounter.textContent = field.cc_remaining_characters;
+        // Update remaining characters
     }
 }
