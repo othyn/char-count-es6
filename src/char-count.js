@@ -51,9 +51,6 @@ export default class CharCount {
 
     } = {}) {
 
-        // Check field maxlength attr alongside limit
-        // This allows for use cases where the dev may not want to imply a hard cap to the field
-
         this.limit = limit;
         this.warning = warning;
         this.danger = danger;
@@ -135,7 +132,11 @@ export default class CharCount {
      */
     calculateRemainingCharacters(field) {
 
-        field.cc_remaining_characters = (this.limit - field.value.length);
+        let limit = (field.hasAttribute('maxlength') ? parseInt(field.getAttribute('maxlength')) : this.limit);
+        // If there is a max length applied to the field, use that instead
+        // TODO - Allow for toggling this behaviour via config
+
+        field.cc_remaining_characters = (limit - field.value.length);
         // Perform count on the field against the limit
 
         let potentialFieldCounter = field.nextElementSibling;
