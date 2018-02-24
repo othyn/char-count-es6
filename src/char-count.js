@@ -138,7 +138,20 @@ export default class CharCount {
         field.cc_remaining_characters = (this.limit - field.value.length);
         // Perform count on the field against the limit
 
-        console.log(field.cc_remaining_characters);
+        let potentialFieldCounter = field.nextElementSibling;
+        // Get the next element to check for counters existence
+        // TODO - Allow for elements that aren't situated directly below field
+
+        if (potentialFieldCounter === null || !potentialFieldCounter.matches(this.countClass)) {
+
+            this.createFieldCounter(field);
+            // Create field counter if there isn't one on the DOM
+
+        } else {
+
+            this.updateFieldCounter(potentialFieldCounter);
+            // Update the existing DOM field counter
+        }
     }
 
     /**
@@ -148,15 +161,17 @@ export default class CharCount {
      */
     createFieldCounter(field) {
 
-        console.log('createFieldCounter');
+        let counterMarkup = `<small class="${this.countClass}">${field.cc_remaining_characters}</small>`;
+
+        console.log(counterMarkup);
     }
 
     /**
-     * Update internal character count for the field
-     * @param  object   field   JS element object
+     * Update internal character count for the fields counter
+     * @param  object   fieldCounter   JS element object
      * @return {[type]}
      */
-    updateFieldCounter(field) {
+    updateFieldCounter(fieldCounter) {
 
         console.log('updateFieldCounter');
     }
