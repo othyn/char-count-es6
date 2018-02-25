@@ -12,6 +12,10 @@ export default class State {
 
         this.threshold = threshold;
         this.colourClass = colourClass;
+        // Init
+
+        //this.active = false;
+        // State current state
     }
 
     /**
@@ -55,4 +59,17 @@ export default class State {
 
         return this;
     }
+
+    /**
+     * Tells whos asking what the state of the state is. Yuh-huh!
+     * @param  boolean  newState    update the state instance state
+     * @return boolean              return the current state instance state
+     */
+    // isActive(newState = null) {
+
+    //     if (newState !== null)
+    //         this.active = newState;
+
+    //     return this.active;
+    // }
 }
