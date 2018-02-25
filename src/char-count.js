@@ -1,3 +1,5 @@
+import State from './helpers/State';
+
 /**
  * Class that counts characters, so you don't have to!
  */
@@ -15,9 +17,15 @@ export default class CharCount {
         danger = 10,
         // Threshold values
 
-        fieldClass = 'cc-field',
-        countClass = 'cc-count',
+        classInitField = 'cc-field',
+        classCounter = 'cc-count',
         // DOM interaction classes
+
+        classStateIsFine = 'cc-is-fine',
+        classStateIsWarning = 'cc-is-warning',
+        classStateIsDanger = 'cc-is-danger',
+        classStateIsLimit = 'cc-is-limit',
+        // DOM state classes
 
         // Callbacks
         // Spent well over an hour trying to research good practice for this
@@ -51,13 +59,16 @@ export default class CharCount {
 
     } = {}) {
 
-        this.limit = limit;
-        this.warning = warning;
-        this.danger = danger;
-        // Setup threshold values
+        this.states = {
+            fine: new State(limit, classStateIsFine),
+            warning: new State(warning, classStateIsWarning),
+            danger: new State(danger, classStateIsDanger),
+            limit: new State(0, classStateIsLimit)
+        };
+        // Define states
 
-        this.fieldClass = fieldClass;
-        this.countClass = countClass;
+        this.classInitField = classInitField;
+        this.classCounter = classCounter;
         // Setup DOM interaction classes
 
         this.onFieldEmpty = onFieldEmpty;
@@ -80,10 +91,6 @@ export default class CharCount {
     // get<Property>(<?>) {}
     // Create setters and getters for all properties to use alongside constructor?
 
-    // setTheme({default = '#000', warning = '#F00', danger = '#FA0'} = {}) {}
-    // OR setColours({default = '#000', warning = '#F00', danger = '#FA0'} = {}) {}
-    // Put colouring options in the constructor and/or as getters/setters?
-
 
     /**
      * Core functionality
@@ -95,7 +102,7 @@ export default class CharCount {
      */
     bindFields() {
 
-        let elements = document.getElementsByClassName(this.fieldClass);
+        let elements = document.getElementsByClassName(this.classInitField);
         // Pull all DOM elements to initialise into an HTMLCollection
 
         if (Object.keys(elements).length === 0)
@@ -144,7 +151,7 @@ export default class CharCount {
         // Get the next element to check for counters existence
         // TODO - Allow for elements that aren't situated directly below field
 
-        if (potentialFieldCounter === null || !potentialFieldCounter.matches(`.${this.countClass}`)) {
+        if (potentialFieldCounter === null || !potentialFieldCounter.matches(`.${this.classCounter}`)) {
 
             this.createFieldCounter(field);
             // Create field counter if there isn't one on the DOM
@@ -163,8 +170,9 @@ export default class CharCount {
      */
     createFieldCounter(field) {
 
-        let counterMarkup = `<small class="${this.countClass}">${field.cc_remaining_characters}</small>`;
+        let counterMarkup = `<small class="${this.classCounter}">${field.cc_remaining_characters}</small>`;
         // Generate counter markup
+        // TODO - Allow this to be templated?
 
         field.insertAdjacentHTML('afterend', counterMarkup);
         // Insert the counter after the field in question
