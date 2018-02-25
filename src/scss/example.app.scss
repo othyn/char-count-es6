@@ -1,13 +1,38 @@
-// These styles assume Bootstrap 4
-// So make amendments as necessary...
+/*
+ * Just some example styling to get you going...
+ * Styling is done with Bootstrap 4 in mind, as that
+ * is used in the dev area. Play around to your hearts
+ * content <3
+ */
 
 @import 'variables';
 // Application variables
 
-.#{$default-counter-class} {
+.#{$class-counter} {
     display: block;
-    text-align: right;
-    margin-top: 5px;
+    float: right;
     transition: color .2s ease-in-out;
-    background: linear-gradient(#e98a00, #f5aa2f);
 }
+// Counter style
+
+.#{$class-counter}.#{$class-counter-fine} {
+    color: $colour-muted;
+}
+// Default colour
+
+.#{$class-counter}.#{$class-counter-warning} {
+    color: $colour-warning;
+}
+// Warning colour
+
+.#{$class-counter}.#{$class-counter-danger} {
+    color: $colour-danger;
+}
+// Danger colour
+
+.#{$class-counter}.#{$class-counter-limit} {
+    color: $colour-white;
+    background-color: $colour-danger;
+    border-radius: 2px;
+}
+// Over limit style
