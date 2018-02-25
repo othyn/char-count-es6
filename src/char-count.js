@@ -134,18 +134,31 @@ export default class CharCount {
     }
 
     /**
+     * Determine the field state, with the intention to fire events/manage state classes
+     * @param  object   field   JS element object
+     * @return state
+     */
+    determineFieldState(field) {
+
+        return this.states.fine;
+    }
+
+    /**
      * Calculates remaining characters but will also need to fire callbacks
      * @param  object   field   JS element object
      * @return void
      */
     calculateRemainingCharacters(field) {
 
-        let limit = (field.hasAttribute('maxlength') ? parseInt(field.getAttribute('maxlength')) : this.limit);
+        let limit = (field.hasAttribute('maxlength') ? parseInt(field.getAttribute('maxlength')) : this.states.fine.getThreshold());
         // If there is a max length applied to the field, use that instead
         // TODO - Allow for toggling this behaviour via config
 
         field.cc_remaining_characters = (limit - field.value.length);
         // Perform count on the field against the limit
+
+        let activeState = this.determineFieldState(field);
+        // Get the active state determined by the result of the calculation
 
         let potentialFieldCounter = field.nextElementSibling;
         // Get the next element to check for counters existence
@@ -153,24 +166,28 @@ export default class CharCount {
 
         if (potentialFieldCounter === null || !potentialFieldCounter.matches(`.${this.classCounter}`)) {
 
-            this.createFieldCounter(field);
+            this.createFieldCounter(field, activeState);
             // Create field counter if there isn't one on the DOM
 
         } else {
 
-            this.updateFieldCounter(field, potentialFieldCounter);
+            this.updateFieldCounter(field, potentialFieldCounter, activeState);
             // Update the existing DOM field counter
         }
     }
 
     /**
      * Generate the markup to be placed under the field, allow templating?
-     * @param  object   field   JS element object
+     * @param  object   field         JS element object
+     * @param  object   activeState   Active State
      * @return void
      */
-    createFieldCounter(field) {
+    createFieldCounter(field, activeState) {
 
-        let counterMarkup = `<small class="${this.classCounter}">${field.cc_remaining_characters}</small>`;
+        let activeColourClass = activeState.getColourClass();
+        // Go get the active colour class
+
+        let counterMarkup = `<small class="${this.classCounter} ${activeColourClass}">${field.cc_remaining_characters}</small>`;
         // Generate counter markup
         // TODO - Allow this to be templated?
 
@@ -182,11 +199,18 @@ export default class CharCount {
      * Update internal character count for the fields counter
      * @param  object   field          JS element object
      * @param  object   fieldCounter   JS element object
+     * @param  object   activeState    Active State
      * @return void
      */
-    updateFieldCounter(field, fieldCounter) {
+    updateFieldCounter(field, fieldCounter, activeState) {
+
+        let activeColourClass = activeState.getColourClass();
+        // Go get the active colour class
 
         fieldCounter.textContent = field.cc_remaining_characters;
         // Update remaining characters
+
+        fieldCounter.className = `${this.classCounter} ${activeColourClass}`;
+        // Set active class
     }
 }

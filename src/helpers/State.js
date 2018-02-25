@@ -8,7 +8,7 @@ export default class State {
      * @param  object   Config to initialise the class with
      * @return void
      */
-    constructor({threshold = 0, colourClass = ''} = {}) {
+    constructor(threshold = 0, colourClass = '') {
 
         this.threshold = threshold;
         this.colourClass = colourClass;
