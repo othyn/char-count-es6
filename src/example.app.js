@@ -1,3 +1,7 @@
+/*
+ * Just an example implementation of the library
+ */
+
 import CharCount from './char-count';
 // Hmm, maybe need to rename the lib file to CharCount
 // to make this a little less confusing...
@@ -30,7 +34,7 @@ new CharCount({
 
     onFieldLimitWithdrawn: (field, count) => {
         console.log('onFieldLimitWithdrawn');
-    },
+    }
 
 });
 // Setup a new instance
