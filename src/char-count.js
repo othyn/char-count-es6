@@ -2,6 +2,8 @@ import State from './helpers/State';
 
 /**
  * Counts characters, so you don't have to!
+ *
+ * TODO - Currently Singleton, this would greatly benefit from an instance per element
  */
 export default class CharCount {
 
@@ -19,6 +21,7 @@ export default class CharCount {
         warning = 25,
         danger = 10,
         // Threshold values
+        // TODO - Potentially look at percentages as well as fixed figures?
 
         classInitField = 'cc-field',
         classCounter = 'cc-count',
@@ -60,6 +63,10 @@ export default class CharCount {
             limit: new State(0, classStateIsLimit)
         };
         // Define states
+
+        // this.activeState = null;
+        // this.remainingCharacters = limit;
+        // TODO - Implement when not singleton
 
         this.classInitField = classInitField;
         this.classCounter = classCounter;
@@ -114,13 +121,94 @@ export default class CharCount {
     }
 
     /**
-     * Determine the field state, with the intention to fire events/manage state classes
+     * Determine the field state, with the intention to fire events/manage active state
      * @param  object   field   JS element object
      * @return state
      */
     determineFieldState(field) {
 
-        return this.states.fine;
+        let remaining  = field.ccRemainingCharacters,
+            fieldState = field.ccActiveState;
+        // Local storage
+
+        if (remaining <= this.states.limit.getThreshold()) {
+
+            // if (!this.states.limit.isActive()) {
+
+            //     this.onFieldLimitReached(field, remaining);
+
+            //     this.states.limit.isActive(true);
+            // }
+            // TODO - Do this method when not singleton
+
+            if (fieldState !== 'limit') {
+
+                this.onFieldLimitReached(field, remaining);
+
+                field.ccActiveState = 'limit';
+
+            }
+            // Fire callback, set active state
+
+            return this.states.limit;
+        }
+        // Limit state trigger
+
+        if (remaining <= this.states.danger.getThreshold()) {
+
+            if (fieldState !== 'danger') {
+
+                this.onFieldDangerReached(field, remaining);
+
+                field.ccActiveState = 'danger';
+            }
+            // Fire callback, set active state
+
+            return this.states.danger;
+        }
+        // Danger state trigger
+
+        if (remaining <= this.states.warning.getThreshold()) {
+
+            if (fieldState !== 'warning') {
+
+                this.onFieldWarningReached(field, remaining);
+
+                field.ccActiveState = 'warning';
+            }
+            // Fire callback, set active state
+
+            return this.states.warning;
+        }
+        // Warning state trigger
+
+        if (remaining <= this.states.fine.getThreshold()) {
+
+            if (fieldState !== 'fine') {
+
+                this.onFieldFine(field, remaining);
+
+                field.ccActiveState = 'fine';
+            }
+            // Fire callback, set active state
+
+            return this.states.fine;
+        }
+        // Fine state trigger
+
+        if (remaining >= this.states.empty.getThreshold()) {
+
+            if (fieldState !== 'empty') {
+
+                this.onFieldEmpty(field, remaining);
+
+                field.ccActiveState = 'empty';
+            }
+            // Fire callback, set active state
+
+            return this.states.empty;
+        }
+        // Empty state trigger
     }
 
     /**
