@@ -44,13 +44,13 @@ export default class CharCount {
         onFieldFine = (field, remaining) => {},
         // Fired when a fields text remaining count is a-okay, after coming from another state
 
-        onFieldWarningReached = (field, remaining) => {},
+        onFieldWarning = (field, remaining) => {},
         // Fired when the warning character remaining count threshold is reached
 
-        onFieldDangerReached = (field, remaining) => {},
+        onFieldDanger = (field, remaining) => {},
         // Fired when the danger character remaining count threshold is reached
 
-        onFieldLimitReached = (field, remaining) => {},
+        onFieldLimit = (field, remaining) => {},
         // Fired when the limit character remaining count threshold is reached
 
     } = {}) {
@@ -74,9 +74,9 @@ export default class CharCount {
 
         this.onFieldEmpty = onFieldEmpty;
         this.onFieldFine = onFieldFine;
-        this.onFieldWarningReached = onFieldWarningReached;
-        this.onFieldDangerReached = onFieldDangerReached;
-        this.onFieldLimitReached = onFieldLimitReached;
+        this.onFieldWarning = onFieldWarning;
+        this.onFieldDanger = onFieldDanger;
+        this.onFieldLimit = onFieldLimit;
         // Register callbacks
 
         this.bindFields();
@@ -135,7 +135,7 @@ export default class CharCount {
 
             // if (!this.states.limit.isActive()) {
 
-            //     this.onFieldLimitReached(field, remaining);
+            //     this.onFieldLimit(field, remaining);
 
             //     this.states.limit.isActive(true);
             // }
@@ -143,7 +143,7 @@ export default class CharCount {
 
             if (fieldState !== 'limit') {
 
-                this.onFieldLimitReached(field, remaining);
+                this.onFieldLimit(field, remaining);
 
                 field.ccActiveState = 'limit';
 
@@ -158,7 +158,7 @@ export default class CharCount {
 
             if (fieldState !== 'danger') {
 
-                this.onFieldDangerReached(field, remaining);
+                this.onFieldDanger(field, remaining);
 
                 field.ccActiveState = 'danger';
             }
@@ -172,7 +172,7 @@ export default class CharCount {
 
             if (fieldState !== 'warning') {
 
-                this.onFieldWarningReached(field, remaining);
+                this.onFieldWarning(field, remaining);
 
                 field.ccActiveState = 'warning';
             }

@@ -16,16 +16,16 @@ new CharCount({
         console.log('onFieldFine');
     },
 
-    onFieldWarningReached: (field, count) => {
-        console.log('onFieldWarningReached');
+    onFieldWarning: (field, count) => {
+        console.log('onFieldWarning');
     },
 
-    onFieldDangerReached: (field, count) => {
-        console.log('onFieldDangerReached');
+    onFieldDanger: (field, count) => {
+        console.log('onFieldDanger');
     },
 
-    onFieldLimitReached: (field, count) => {
-        console.log('onFieldLimitReached');
+    onFieldLimit: (field, count) => {
+        console.log('onFieldLimit');
     }
 
 });
