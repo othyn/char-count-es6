@@ -134,7 +134,7 @@ export default class CharCount {
         // If there is a max length applied to the field, use that instead
         // TODO - Allow for toggling this behaviour via config
 
-        field.cc_remaining_characters = (limit - field.value.length);
+        field.ccRemainingCharacters = (limit - field.value.length);
         // Perform count on the field against the limit
 
         let activeState = this.determineFieldState(field);
@@ -167,7 +167,7 @@ export default class CharCount {
         let activeColourClass = activeState.getColourClass();
         // Go get the active colour class
 
-        let counterMarkup = `<small class="${this.classCounter} ${activeColourClass}">${field.cc_remaining_characters}</small>`;
+        let counterMarkup = `<small class="${this.classCounter} ${activeColourClass}">${field.ccRemainingCharacters}</small>`;
         // Generate counter markup
         // TODO - Allow this to be templated?
 
@@ -187,7 +187,7 @@ export default class CharCount {
         let activeColourClass = activeState.getColourClass();
         // Go get the active colour class
 
-        fieldCounter.textContent = field.cc_remaining_characters;
+        fieldCounter.textContent = field.ccRemainingCharacters;
         // Update remaining characters
 
         fieldCounter.className = `${this.classCounter} ${activeColourClass}`;
