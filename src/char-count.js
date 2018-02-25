@@ -12,6 +12,9 @@ export default class CharCount {
      */
     constructor({
 
+        // Config
+        // -----
+
         limit = 100,
         warning = 25,
         danger = 10,
@@ -27,14 +30,9 @@ export default class CharCount {
         classStateIsLimit = 'cc-is-limit',
         // DOM state classes
 
+
         // Callbacks
-        // Spent well over an hour trying to research good practice for this
-        // behaviour in ES6/etc. as it was fairly common in jQuery for options
-        // but I don't know whether to repeat this behaviour. At the moment,
-        // its the only way I can think of implementing the required functionality.
-        // Would like to find some libraries as reference to see how this has been
-        // done by other devs, or I am welcome to discuss other methods of implementation
-        // for this if another method is more efficient/best practice.
+        // -----
 
         onFieldEmpty = (field) => {},
         // Fired when a fields text count is zero; not entirely sure on its continued usefulness
