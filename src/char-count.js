@@ -1,7 +1,7 @@
 import State from './helpers/State';
 
 /**
- * Class that counts characters, so you don't have to!
+ * Counts characters, so you don't have to!
  */
 export default class CharCount {
 
