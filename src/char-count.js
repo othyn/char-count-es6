@@ -84,18 +84,6 @@ export default class CharCount {
         // Bind the class to the defined DOM interaction classes
     }
 
-
-    // Getters/setters
-
-    // set<Property>(<?>) {}
-    // get<Property>(<?>) {}
-    // Create setters and getters for all properties to use alongside constructor?
-
-
-    /**
-     * Core functionality
-     */
-
     /**
      * Binds listener events to the fields with the configured class
      * @return void
