@@ -24,6 +24,7 @@ export default class CharCount {
         classCounter = 'cc-count',
         // DOM interaction classes
 
+        classStateIsEmpty = 'cc-is-empty',
         classStateIsFine = 'cc-is-fine',
         classStateIsWarning = 'cc-is-warning',
         classStateIsDanger = 'cc-is-danger',
@@ -34,31 +35,26 @@ export default class CharCount {
         // Callbacks
         // -----
 
-        onFieldEmpty = (field) => {},
+        onFieldEmpty = (field, remaining) => {},
         // Fired when a fields text count is zero; not entirely sure on its continued usefulness
 
-        onFieldWarningReached = (field, count) => {},
-        // Fired when the warning character count threshold is reached
+        onFieldFine = (field, remaining) => {},
+        // Fired when a fields text remaining count is a-okay, after coming from another state
 
-        onFieldWarningWithdrawn = (field, count) => {},
-        // Fired after the character count returns to below that of the warning threshold
+        onFieldWarningReached = (field, remaining) => {},
+        // Fired when the warning character remaining count threshold is reached
 
-        onFieldDangerReached = (field, count) => {},
-        // Fired when the danger character count threshold is reached
+        onFieldDangerReached = (field, remaining) => {},
+        // Fired when the danger character remaining count threshold is reached
 
-        onFieldDangerWithdrawn = (field, count) => {},
-        // Fired after the character count returns to below that of the warning threshold
-
-        onFieldLimitReached = (field, count) => {},
-        // Fired when the limit character count threshold is reached
-
-        onFieldLimitWithdrawn = (field, count) => {}
-        // Fired after the character count returns to below that of the limit threshold
+        onFieldLimitReached = (field, remaining) => {},
+        // Fired when the limit character remaining count threshold is reached
 
     } = {}) {
 
         this.states = {
-            fine: new State(limit, classStateIsFine),
+            empty: new State(limit, classStateIsEmpty),
+            fine: new State((limit - 1), classStateIsFine),
             warning: new State(warning, classStateIsWarning),
             danger: new State(danger, classStateIsDanger),
             limit: new State(0, classStateIsLimit)
@@ -70,12 +66,10 @@ export default class CharCount {
         // Setup DOM interaction classes
 
         this.onFieldEmpty = onFieldEmpty;
+        this.onFieldFine = onFieldFine;
         this.onFieldWarningReached = onFieldWarningReached;
-        this.onFieldWarningWithdrawn = onFieldWarningWithdrawn;
         this.onFieldDangerReached = onFieldDangerReached;
-        this.onFieldDangerWithdrawn = onFieldDangerWithdrawn;
         this.onFieldLimitReached = onFieldLimitReached;
-        this.onFieldLimitWithdrawn = onFieldLimitWithdrawn;
         // Register callbacks
 
         this.bindFields();
@@ -136,7 +130,7 @@ export default class CharCount {
      */
     calculateRemainingCharacters(field) {
 
-        let limit = (field.hasAttribute('maxlength') ? parseInt(field.getAttribute('maxlength')) : this.states.fine.getThreshold());
+        let limit = (field.hasAttribute('maxlength') ? parseInt(field.getAttribute('maxlength')) : this.states.empty.getThreshold());
         // If there is a max length applied to the field, use that instead
         // TODO - Allow for toggling this behaviour via config
 

@@ -12,28 +12,20 @@ new CharCount({
         console.log('onFieldEmpty');
     },
 
-    onFieldWarningReached: (field, count) => {
-        console.log('onFieldWarningReached');
+    onFieldFine: (field) => {
+        console.log('onFieldFine');
     },
 
-    onFieldWarningWithdrawn: (field, count) => {
-        console.log('onFieldWarningWithdrawn');
+    onFieldWarningReached: (field, count) => {
+        console.log('onFieldWarningReached');
     },
 
     onFieldDangerReached: (field, count) => {
         console.log('onFieldDangerReached');
     },
 
-    onFieldDangerWithdrawn: (field, count) => {
-        console.log('onFieldDangerWithdrawn');
-    },
-
     onFieldLimitReached: (field, count) => {
         console.log('onFieldLimitReached');
-    },
-
-    onFieldLimitWithdrawn: (field, count) => {
-        console.log('onFieldLimitWithdrawn');
     }
 
 });

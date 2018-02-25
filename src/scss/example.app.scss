@@ -15,10 +15,15 @@
 }
 // Counter style
 
+.#{$class-counter}.#{$class-counter-empty} {
+    color: $colour-muted;
+}
+// Empty colour
+
 .#{$class-counter}.#{$class-counter-fine} {
     color: $colour-muted;
 }
-// Default colour
+// Fine colour
 
 .#{$class-counter}.#{$class-counter-warning} {
     color: $colour-warning;
