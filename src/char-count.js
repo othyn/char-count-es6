@@ -55,6 +55,8 @@ export default class CharCount {
 
     } = {}) {
 
+        // TODO - Singleton removal, override limit based on maxlength for initd. field
+
         this.states = {
             empty: new State(limit, classStateIsEmpty),
             fine: new State((limit - 1), classStateIsFine),
