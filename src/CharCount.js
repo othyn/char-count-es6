@@ -1,4 +1,5 @@
 import State from './CharCountState';
+import * as Errors from './CharCountErrors';
 
 /**
  * Counts characters, so you don't have to!
@@ -94,42 +95,49 @@ export default class CharCount {
      */
     bindFields() {
 
-        // Conditional assignments won't get passed eslint, event with "no-cond-assign" set
-        // So unsure whether its good practice in JS. I just miss if (let ...) ...
+        try {
 
-        if (document.getElementById(this.selector) !== null) {
+            // Conditional assignments won't get passed eslint, event with "no-cond-assign" set
+            // So unsure whether its good practice in JS. I just miss if (let ...) ...
 
-            // ID passed, go ahead and initialise this instance only against the requested element
+            if (document.getElementById(this.selector) !== null) {
 
-            let element = document.getElementById(this.selector);
-            // Grab the element in question
+                // ID passed, go ahead and initialise this instance only against the requested element
 
-            element.addEventListener('input', this.handleInputEvent.bind(this));
-            // Register the event listener to the DOM elements required
-            // TODO - May need to add multiple event listeners, see how it goes
-            // https://stackoverflow.com/questions/8796988/binding-multiple-events-to-a-listener-without-jquery#comment49312823_27029689
+                let element = document.getElementById(this.selector);
+                // Grab the element in question
 
-            this.calculateRemainingCharacters(element);
-            // Calculate initial counts for each element
+                element.addEventListener('input', this.handleInputEvent.bind(this));
+                // Register the event listener to the DOM elements required
+                // TODO - May need to add multiple event listeners, see how it goes
+                // https://stackoverflow.com/questions/8796988/binding-multiple-events-to-a-listener-without-jquery#comment49312823_27029689
 
-        } else if (document.getElementsByClassName(this.selector).length !== 0) {
+                this.calculateRemainingCharacters(element);
+                // Calculate initial counts for each element
 
-            // Class passed, go ahead and initialise all instances by element and store references
-            // in this instance
+            } else if (document.getElementsByClassName(this.selector).length !== 0) {
 
-            let elements = document.getElementsByClassName(this.selector);
-            // Pull all DOM elements to initialise into an HTMLCollection
+                // Class passed, go ahead and initialise all instances by element and store references
+                // in this instance
 
-            Array.from(elements, el => {
+                let elements = document.getElementsByClassName(this.selector);
+                // Pull all DOM elements to initialise into an HTMLCollection
 
-                //this.instances.push(  );
-                // Factory for creating new instances?
+                Array.from(elements, el => {
 
-            });
+                    //this.instances.push(  );
+                    // Factory for creating new instances?
 
-        } else {
+                });
 
-            return console.warn('No elements found with supplied selector', this.selector);
+            } else {
+
+                throw new Errors.SelectorError('No elements found with supplied selector', this.selector);
+            }
+
+        } catch (error) {
+
+            return console.warn(error.message, error.selector);
         }
         // Determine what the instance needs to initialise as
     }
