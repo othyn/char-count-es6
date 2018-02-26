@@ -4,7 +4,7 @@ import State from './CharCountState';
 /**
  * Counts characters, so you don't have to!
  *
- * TODO - Currently Singleton, this would greatly benefit from an instance per element
+ * TODO: Currently Singleton, this would greatly benefit from an instance per element
  */
 export default class CharCount {
 
@@ -22,7 +22,7 @@ export default class CharCount {
         danger = 10,
         limit = 100,
         // Threshold values
-        // TODO - Potentially look at percentages as well as fixed figures?
+        // TODO: Potentially look at percentages as well as fixed figures?
 
         selector = 'cc-field',
         classCounter = 'cc-count',
@@ -56,7 +56,7 @@ export default class CharCount {
 
     } = {}) {
 
-        // TODO - Singleton removal, override limit based on maxlength for initd. field
+        // TODO: Singleton removal, override limit based on maxlength for initd. field
 
         this.states = {
             empty: new State(0, classStateIsEmpty),
@@ -69,7 +69,7 @@ export default class CharCount {
 
         // this.activeState = null;
         // this.remainingCharacters = limit;
-        // TODO - Implement when not singleton
+        // TODO: Implement when not singleton
 
         this.selector = selector;
         this.classCounter = classCounter;
@@ -82,8 +82,9 @@ export default class CharCount {
         this.onFieldExpended = onFieldExpended;
         // Register callbacks
 
-        this.instances = {};
+        // this.instances = {};
         // Stores all active instances of the class
+        // TODO: Implement when not singleton
 
         this.bindFields();
         // Bind the class to the defined DOM interaction classes
@@ -107,8 +108,6 @@ export default class CharCount {
 
             element.addEventListener('input', this.handleInputEvent.bind(this));
             // Register the event listener to the DOM elements required
-            // TODO - May need to add multiple event listeners, see how it goes
-            // https://stackoverflow.com/questions/8796988/binding-multiple-events-to-a-listener-without-jquery#comment49312823_27029689
 
             this.calculateRemainingCharacters(element);
             // Calculate initial counts for each element
@@ -124,7 +123,8 @@ export default class CharCount {
             Array.from(elements, el => {
 
                 //this.instances.push(  );
-                // Factory for creating new instances?
+                // TODO: Factory for creating new instances?
+                // TODO: Implement when not singleton
 
             });
 
@@ -180,7 +180,7 @@ export default class CharCount {
 
             //     this.states.expended.isActive(true);
             // }
-            // TODO - Do this method when not singleton
+            // TODO: Do this method when not singleton
 
             if (fieldState !== 'expended') {
 
@@ -247,7 +247,7 @@ export default class CharCount {
 
         let limit = (field.hasAttribute('maxlength') ? parseInt(field.getAttribute('maxlength')) : this.states.fine.threshold);
         // If there is a max length applied to the field, use that instead
-        // TODO - Allow for toggling this behaviour via config
+        // TODO: Allow for toggling this behaviour via config
 
         field.ccRemainingCharacters = (limit - field.value.length);
         // Perform count on the field against the limit
@@ -257,7 +257,7 @@ export default class CharCount {
 
         let potentialFieldCounter = field.nextElementSibling;
         // Get the next element to check for counters existence
-        // TODO - Allow for elements that aren't situated directly below field
+        // TODO: Allow for elements that aren't situated directly below field
 
         if (potentialFieldCounter === null || !potentialFieldCounter.matches(`.${this.classCounter}`)) {
 
@@ -284,7 +284,7 @@ export default class CharCount {
 
         let counterMarkup = `<small class="${this.classCounter} ${activeColourClass}">${field.ccRemainingCharacters}</small>`;
         // Generate counter markup
-        // TODO - Allow this to be templated?
+        // TODO: Allow this to be templated?
 
         field.insertAdjacentHTML('afterend', counterMarkup);
         // Insert the counter after the field in question
