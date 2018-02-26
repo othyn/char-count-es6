@@ -148,7 +148,7 @@ export default class CharCount {
         }
         // Empty state trigger
 
-        if (remaining <= this.states.expended.getThreshold()) {
+        if (remaining <= this.states.expended.threshold) {
 
             // if (!this.states.expended.isActive()) {
 
@@ -171,7 +171,7 @@ export default class CharCount {
         }
         // Limit state trigger
 
-        if (remaining <= this.states.danger.getThreshold()) {
+        if (remaining <= this.states.danger.threshold) {
 
             if (fieldState !== 'danger') {
 
@@ -185,7 +185,7 @@ export default class CharCount {
         }
         // Danger state trigger
 
-        if (remaining <= this.states.warning.getThreshold()) {
+        if (remaining <= this.states.warning.threshold) {
 
             if (fieldState !== 'warning') {
 
@@ -199,7 +199,7 @@ export default class CharCount {
         }
         // Warning state trigger
 
-        if (remaining <= this.states.fine.getThreshold()) {
+        if (remaining <= this.states.fine.threshold) {
 
             if (fieldState !== 'fine') {
 
@@ -221,7 +221,7 @@ export default class CharCount {
      */
     calculateRemainingCharacters(field) {
 
-        let limit = (field.hasAttribute('maxlength') ? parseInt(field.getAttribute('maxlength')) : this.states.fine.getThreshold());
+        let limit = (field.hasAttribute('maxlength') ? parseInt(field.getAttribute('maxlength')) : this.states.fine.threshold);
         // If there is a max length applied to the field, use that instead
         // TODO - Allow for toggling this behaviour via config
 
@@ -255,7 +255,7 @@ export default class CharCount {
      */
     createFieldCounter(field, activeState) {
 
-        let activeColourClass = activeState.getColourClass();
+        let activeColourClass = activeState.colourClass;
         // Go get the active colour class
 
         let counterMarkup = `<small class="${this.classCounter} ${activeColourClass}">${field.ccRemainingCharacters}</small>`;
@@ -275,7 +275,7 @@ export default class CharCount {
      */
     updateFieldCounter(field, fieldCounter, activeState) {
 
-        let activeColourClass = activeState.getColourClass();
+        let activeColourClass = activeState.colourClass;
         // Go get the active colour class
 
         fieldCounter.textContent = field.ccRemainingCharacters;
