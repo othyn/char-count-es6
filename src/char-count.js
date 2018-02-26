@@ -129,9 +129,24 @@ export default class CharCount {
      */
     determineFieldState(field) {
 
-        let remaining  = field.ccRemainingCharacters,
-            fieldState = field.ccActiveState;
+        let remaining   = field.ccRemainingCharacters,
+            fieldState  = field.ccActiveState,
+            fieldLength = field.value.length;
         // Local storage
+
+        if (fieldLength == 0) {
+
+            if (fieldState !== 'empty') {
+
+                this.onFieldEmpty(field, remaining);
+
+                field.ccActiveState = 'empty';
+            }
+            // Fire callback, set active state
+
+            return this.states.empty;
+        }
+        // Empty state trigger
 
         if (remaining <= this.states.limit.getThreshold()) {
 
@@ -197,20 +212,6 @@ export default class CharCount {
             return this.states.fine;
         }
         // Fine state trigger
-
-        if (remaining >= this.states.empty.getThreshold()) {
-
-            if (fieldState !== 'empty') {
-
-                this.onFieldEmpty(field, remaining);
-
-                field.ccActiveState = 'empty';
-            }
-            // Fire callback, set active state
-
-            return this.states.empty;
-        }
-        // Empty state trigger
     }
 
     /**
