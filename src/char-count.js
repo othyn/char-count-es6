@@ -17,13 +17,13 @@ export default class CharCount {
         // Config
         // -----
 
-        limit = 100,
         warning = 25,
         danger = 10,
+        limit = 100,
         // Threshold values
         // TODO - Potentially look at percentages as well as fixed figures?
 
-        classInitField = 'cc-field',
+        selector = 'cc-field',
         classCounter = 'cc-count',
         // DOM interaction classes
 
@@ -70,7 +70,7 @@ export default class CharCount {
         // this.remainingCharacters = limit;
         // TODO - Implement when not singleton
 
-        this.classInitField = classInitField;
+        this.selector = selector;
         this.classCounter = classCounter;
         // Setup DOM interaction classes
 
@@ -91,7 +91,7 @@ export default class CharCount {
      */
     bindFields() {
 
-        let elements = document.getElementsByClassName(this.classInitField);
+        let elements = document.getElementsByClassName(this.selector);
         // Pull all DOM elements to initialise into an HTMLCollection
 
         if (Object.keys(elements).length === 0)
