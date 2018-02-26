@@ -1,4 +1,4 @@
-import State from './helpers/State';
+import State from './CharCountState';
 
 /**
  * Counts characters, so you don't have to!

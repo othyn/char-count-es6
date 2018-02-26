@@ -27,10 +27,10 @@ module.exports = env => {
 
     if (env === 'prod') {
 
-        entry = path.resolve('./src/char-count.js');
+        entry = path.resolve('./src/CharCount.js');
         // Build lib
 
-        outputFile = 'char-count.min.js';
+        outputFile = 'charcount.min.js';
         outputPath = path.resolve('./dist');
         // Prod build location/file
 
@@ -82,7 +82,7 @@ module.exports = env => {
         output: {
             path: outputPath,
             filename: outputFile,
-            library: 'char-count',
+            library: 'CharCount',
             libraryTarget: 'umd',
             umdNamedDefine: true
         },

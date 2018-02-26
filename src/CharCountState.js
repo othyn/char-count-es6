@@ -1,7 +1,7 @@
 /**
  * A state to be used by CharCount
  */
-export default class State {
+export default class CharCountState {
 
     /**
      * constructor
