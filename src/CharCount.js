@@ -157,7 +157,7 @@ export default class CharCount {
             fieldLength = field.value.length;
         // Local storage
 
-        if (fieldLength == 0) {
+        if (fieldLength === 0) {
 
             if (fieldState !== 'empty') {
 
