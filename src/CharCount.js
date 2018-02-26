@@ -81,6 +81,9 @@ export default class CharCount {
         this.onFieldExpended = onFieldExpended;
         // Register callbacks
 
+        this.instances = {};
+        // Stores all active instances of the class
+
         this.bindFields();
         // Bind the class to the defined DOM interaction classes
     }
@@ -91,24 +94,44 @@ export default class CharCount {
      */
     bindFields() {
 
-        let elements = document.getElementsByClassName(this.selector);
-        // Pull all DOM elements to initialise into an HTMLCollection
+        // Conditional assignments won't get passed eslint, event with "no-cond-assign" set
+        // So unsure whether its good practice in JS. I just miss if (let ...) ...
 
-        if (Object.keys(elements).length === 0)
-            return console.warn('CharCount: No elements initialised');
-        // Check for elements on DOM
+        if (document.getElementById(this.selector) !== null) {
 
-        Array.from(elements, el => {
+            // ID passed, go ahead and initialise this instance only against the requested element
 
-            el.addEventListener('input', this.handleInputEvent.bind(this));
+            let element = document.getElementById(this.selector);
+            // Grab the element in question
+
+            element.addEventListener('input', this.handleInputEvent.bind(this));
             // Register the event listener to the DOM elements required
             // TODO - May need to add multiple event listeners, see how it goes
             // https://stackoverflow.com/questions/8796988/binding-multiple-events-to-a-listener-without-jquery#comment49312823_27029689
 
-            this.calculateRemainingCharacters(el);
+            this.calculateRemainingCharacters(element);
             // Calculate initial counts for each element
-        });
 
+        } else if (document.getElementsByClassName(this.selector).length !== 0) {
+
+            // Class passed, go ahead and initialise all instances by element and store references
+            // in this instance
+
+            let elements = document.getElementsByClassName(this.selector);
+            // Pull all DOM elements to initialise into an HTMLCollection
+
+            Array.from(elements, el => {
+
+                //this.instances.push(  );
+                // Factory for creating new instances?
+
+            });
+
+        } else {
+
+            return console.warn('No elements found with supplied selector', this.selector);
+        }
+        // Determine what the instance needs to initialise as
     }
 
     /**
