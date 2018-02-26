@@ -10,21 +10,21 @@ export default class State {
      */
     constructor(threshold = 0, colourClass = '') {
 
-        this.threshold = threshold;
-        this.colourClass = colourClass;
+        this._threshold = threshold;
+        this._colourClass = colourClass;
         // Init
 
-        //this.active = false;
+        //this._active = false;
         // State current state
     }
 
     /**
      * Get the threshold value for the state instance
-     * @return int  threshold value
+     * @return int  _threshold  value
      */
-    getThreshold() {
+    get threshold() {
 
-        return this.threshold;
+        return this._threshold;
     }
 
     /**
@@ -32,20 +32,20 @@ export default class State {
      * @param  int      threshold   threshold value
      * @return object   this        just incase you fancy method chaining
      */
-    setThreshold(threshold = 0) {
+    set threshold(threshold = 0) {
 
-        this.threshold = threshold;
+        this._threshold = threshold;
 
         return this;
     }
 
     /**
      * Get the colourClass for the state instance
-     * @return string   DOM class
+     * @return string  _colourClass DOM class
      */
-    getColourClass() {
+    get colourClass() {
 
-        return this.colourClass;
+        return this._colourClass;
     }
 
     /**
@@ -53,9 +53,9 @@ export default class State {
      * @param  string   colourClass DOM class
      * @return object   this        just incase you fancy method chaining
      */
-    setColourClass(colourClass = 0) {
+    set colourClass(colourClass = 0) {
 
-        this.colourClass = colourClass;
+        this._colourClass = colourClass;
 
         return this;
     }
@@ -68,7 +68,7 @@ export default class State {
     // isActive(newState = null) {
 
     //     if (newState !== null)
-    //         this.active = newState;
+    //         this._active = newState;
 
     //     return this.active;
     // }
