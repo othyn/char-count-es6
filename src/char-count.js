@@ -31,7 +31,7 @@ export default class CharCount {
         classStateIsFine = 'cc-is-fine',
         classStateIsWarning = 'cc-is-warning',
         classStateIsDanger = 'cc-is-danger',
-        classStateIsLimit = 'cc-is-limit',
+        classStateIsExpended = 'cc-is-expended',
         // DOM state classes
 
 
@@ -50,7 +50,7 @@ export default class CharCount {
         onFieldDanger = (field, remaining) => {},
         // Fired when the desired danger threshold is reached
 
-        onFieldLimit = (field, remaining) => {},
+        onFieldExpended = (field, remaining) => {},
         // Fired when the limit is all used up!
 
     } = {}) {
@@ -62,7 +62,7 @@ export default class CharCount {
             fine: new State((limit - 1), classStateIsFine),
             warning: new State(warning, classStateIsWarning),
             danger: new State(danger, classStateIsDanger),
-            limit: new State(0, classStateIsLimit)
+            expended: new State(0, classStateIsExpended)
         };
         // Define states
 
@@ -78,7 +78,7 @@ export default class CharCount {
         this.onFieldFine = onFieldFine;
         this.onFieldWarning = onFieldWarning;
         this.onFieldDanger = onFieldDanger;
-        this.onFieldLimit = onFieldLimit;
+        this.onFieldExpended = onFieldExpended;
         // Register callbacks
 
         this.bindFields();
@@ -148,26 +148,26 @@ export default class CharCount {
         }
         // Empty state trigger
 
-        if (remaining <= this.states.limit.getThreshold()) {
+        if (remaining <= this.states.expended.getThreshold()) {
 
-            // if (!this.states.limit.isActive()) {
+            // if (!this.states.expended.isActive()) {
 
-            //     this.onFieldLimit(field, remaining);
+            //     this.onFieldExpended(field, remaining);
 
-            //     this.states.limit.isActive(true);
+            //     this.states.expended.isActive(true);
             // }
             // TODO - Do this method when not singleton
 
-            if (fieldState !== 'limit') {
+            if (fieldState !== 'expended') {
 
-                this.onFieldLimit(field, remaining);
+                this.onFieldExpended(field, remaining);
 
-                field.ccActiveState = 'limit';
+                field.ccActiveState = 'expended';
 
             }
             // Fire callback, set active state
 
-            return this.states.limit;
+            return this.states.expended;
         }
         // Limit state trigger
 

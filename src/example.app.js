@@ -40,9 +40,9 @@ new CharCount({
         // Set field to Bootstrap danger state
     },
 
-    onFieldLimit: (field, count) => {
+    onFieldExpended: (field, count) => {
 
-        console.log('onFieldLimit');
+        console.log('onFieldExpended');
 
         field.className = 'form-control cc-field is-invalid';
         // Set field to Bootstrap danger state
