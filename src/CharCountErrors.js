@@ -19,14 +19,14 @@ class CharCountError extends Error {
 /**
  * Invalid selector passed to initialise against
  */
-export class SelectorError extends CharCountError {
+// export class SelectorError extends CharCountError {
 
-    constructor(message, selector) {
+//     constructor(message, selector) {
 
-        super(message);
-        // Call parent constructor
+//         super(message);
+//         // Call parent constructor
 
-        this.selector = selector;
-        // Store the selector in question
-    }
-}
+//         this.selector = selector;
+//         // Store the selector in question
+//     }
+// }

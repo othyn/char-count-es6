@@ -1,5 +1,5 @@
 import State from './CharCountState';
-import * as Errors from './CharCountErrors';
+// import * as Errors from './CharCountErrors';
 
 /**
  * Counts characters, so you don't have to!
@@ -95,49 +95,42 @@ export default class CharCount {
      */
     bindFields() {
 
-        try {
+        // Conditional assignments won't get passed eslint, event with "no-cond-assign" set
+        // So unsure whether its good practice in JS. I just miss if (let ...) ...
 
-            // Conditional assignments won't get passed eslint, event with "no-cond-assign" set
-            // So unsure whether its good practice in JS. I just miss if (let ...) ...
+        if (document.getElementById(this.selector) !== null) {
 
-            if (document.getElementById(this.selector) !== null) {
+            // ID passed, go ahead and initialise this instance only against the requested element
 
-                // ID passed, go ahead and initialise this instance only against the requested element
+            let element = document.getElementById(this.selector);
+            // Grab the element in question
 
-                let element = document.getElementById(this.selector);
-                // Grab the element in question
+            element.addEventListener('input', this.handleInputEvent.bind(this));
+            // Register the event listener to the DOM elements required
+            // TODO - May need to add multiple event listeners, see how it goes
+            // https://stackoverflow.com/questions/8796988/binding-multiple-events-to-a-listener-without-jquery#comment49312823_27029689
 
-                element.addEventListener('input', this.handleInputEvent.bind(this));
-                // Register the event listener to the DOM elements required
-                // TODO - May need to add multiple event listeners, see how it goes
-                // https://stackoverflow.com/questions/8796988/binding-multiple-events-to-a-listener-without-jquery#comment49312823_27029689
+            this.calculateRemainingCharacters(element);
+            // Calculate initial counts for each element
 
-                this.calculateRemainingCharacters(element);
-                // Calculate initial counts for each element
+        } else if (document.getElementsByClassName(this.selector).length !== 0) {
 
-            } else if (document.getElementsByClassName(this.selector).length !== 0) {
+            // Class passed, go ahead and initialise all instances by element and store references
+            // in this instance
 
-                // Class passed, go ahead and initialise all instances by element and store references
-                // in this instance
+            let elements = document.getElementsByClassName(this.selector);
+            // Pull all DOM elements to initialise into an HTMLCollection
 
-                let elements = document.getElementsByClassName(this.selector);
-                // Pull all DOM elements to initialise into an HTMLCollection
+            Array.from(elements, el => {
 
-                Array.from(elements, el => {
+                //this.instances.push(  );
+                // Factory for creating new instances?
 
-                    //this.instances.push(  );
-                    // Factory for creating new instances?
+            });
 
-                });
+        } else {
 
-            } else {
-
-                throw new Errors.SelectorError('No elements found with supplied selector', this.selector);
-            }
-
-        } catch (error) {
-
-            return console.warn(error.message, error.selector);
+            return console.warn('No elements found with supplied selector', this.selector);
         }
         // Determine what the instance needs to initialise as
     }
