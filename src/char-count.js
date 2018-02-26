@@ -58,8 +58,8 @@ export default class CharCount {
         // TODO - Singleton removal, override limit based on maxlength for initd. field
 
         this.states = {
-            empty: new State(limit, classStateIsEmpty),
-            fine: new State((limit - 1), classStateIsFine),
+            empty: new State(0, classStateIsEmpty),
+            fine: new State(limit, classStateIsFine),
             warning: new State(warning, classStateIsWarning),
             danger: new State(danger, classStateIsDanger),
             expended: new State(0, classStateIsExpended)
@@ -221,7 +221,7 @@ export default class CharCount {
      */
     calculateRemainingCharacters(field) {
 
-        let limit = (field.hasAttribute('maxlength') ? parseInt(field.getAttribute('maxlength')) : this.states.empty.getThreshold());
+        let limit = (field.hasAttribute('maxlength') ? parseInt(field.getAttribute('maxlength')) : this.states.fine.getThreshold());
         // If there is a max length applied to the field, use that instead
         // TODO - Allow for toggling this behaviour via config
 
