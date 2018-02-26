@@ -45,13 +45,13 @@ export default class CharCount {
         // Fired when a fields text remaining count is a-okay, after coming from another state
 
         onFieldWarning = (field, remaining) => {},
-        // Fired when the warning character remaining count threshold is reached
+        // Fired when the desired warning threshold is reached
 
         onFieldDanger = (field, remaining) => {},
-        // Fired when the danger character remaining count threshold is reached
+        // Fired when the desired danger threshold is reached
 
         onFieldLimit = (field, remaining) => {},
-        // Fired when the limit character remaining count threshold is reached
+        // Fired when the limit is all used up!
 
     } = {}) {
 
