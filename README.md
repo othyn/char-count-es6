@@ -1,9 +1,9 @@
 # CharCount
 [![npm](https://img.shields.io/npm/v/char-count-es6.svg)](https://www.npmjs.com/package/char-count-es6)
 
-A lightweight (~7KB min) ES6 library for dealing with character counts on text fields, providing events, live counters and more!
-
 <p align="center"><img src="example.gif" alt="example usage"/></p>
+
+A lightweight (~7KB min) ES6 library for dealing with character counts on text fields, providing events, live counters and more!
 
 An interactive preview can be found on the [GitHub page for this project](https://othyn.github.io/char-count/).
 
