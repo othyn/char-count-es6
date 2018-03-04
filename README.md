@@ -15,7 +15,7 @@ Based on this, events are fired to allow utilisation of that fact and a counter 
 ## Installation
 
 ### Via NPM
-`$ npm install char-count --save-dev`
+`$ npm install char-count-es6 --save-dev`
 
 ### Via download
 Download the minified source from `dist` and include in your project via
@@ -23,7 +23,7 @@ Download the minified source from `dist` and include in your project via
 `<script src="/path/to/charcount.min.js"></script>`
 
 ## Usage
-To begin, import the ES6 library where required `import CharCount from 'CharCount';`
+To begin, import the ES6 library where required `import CharCount from 'char-count-es6';`
 
 To create a new instance, you can define a new `CharCount`, e.g. `let myCharCount = new CharCount( <options> );`. The variable will contain an array of initialised instances, stored in the `instances` property. The element also has the instance registered against it, in the `CharCount` property.
 
