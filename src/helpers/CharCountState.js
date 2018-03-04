@@ -5,8 +5,9 @@ export default class CharCountState {
 
     /**
      * constructor
-     * @param  object   Config to initialise the class with
-     * @return void
+     * @param  {int}    threshold   Element input length threshold for state
+     * @param  {string} colourClass DOM class that state declares as
+     * @return {void}
      */
     constructor(threshold = 0, colourClass = '') {
 
@@ -20,7 +21,7 @@ export default class CharCountState {
 
     /**
      * Get the threshold value for the state instance
-     * @return int  _threshold  value
+     * @return {int}    _threshold  value
      */
     get threshold() {
 
@@ -29,8 +30,8 @@ export default class CharCountState {
 
     /**
      * Set the threshold for the state instance
-     * @param  int      threshold   threshold value
-     * @return object   this        just incase you fancy method chaining
+     * @param  {int}    threshold   threshold value
+     * @return {object} this        just incase you fancy method chaining
      */
     set threshold(threshold = 0) {
 
@@ -41,7 +42,7 @@ export default class CharCountState {
 
     /**
      * Get the colourClass for the state instance
-     * @return string  _colourClass DOM class
+     * @return {string} _colourClass    DOM class
      */
     get colourClass() {
 
@@ -50,8 +51,8 @@ export default class CharCountState {
 
     /**
      * Set the colourClass for the state instance
-     * @param  string   colourClass DOM class
-     * @return object   this        just incase you fancy method chaining
+     * @param  {string} colourClass DOM class
+     * @return {object} this        Just incase you fancy method chaining
      */
     set colourClass(colourClass = 0) {
 
@@ -62,8 +63,8 @@ export default class CharCountState {
 
     /**
      * Tells whos asking what the state of the state is. Yuh-huh!
-     * @param  boolean  newState    update the state instance state
-     * @return boolean              return the current state instance state
+     * @param  {boolean}    newState    Update the state instance state
+     * @return {boolean}                Return the current state instance state
      */
     isActive(newState = null) {
 
