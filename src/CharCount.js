@@ -163,6 +163,35 @@ export default class CharCount {
     }
 
     /**
+     * Generate the markup to be placed under the element, allow templating?
+     * @return void
+     */
+    createElementCounter() {
+
+        let counterMarkup = `<small class="${this.counterClass} ${this.activeState.colourClass}">${this.remainingCharacters}</small>`;
+        // Generate counter markup
+        // TODO: Allow this to be templated?
+
+        this.element.insertAdjacentHTML('afterend', counterMarkup);
+        // Insert the counter after the element in question
+
+        return this.element.nextElementSibling;
+    }
+
+    /**
+     * Update character count for the elements counter
+     * @return void
+     */
+    updateElementCounter() {
+
+        this.counter.textContent = this.remainingCharacters;
+        // Update remaining characters
+
+        this.counter.className = `${this.counterClass} ${this.activeState.colourClass}`;
+        // Set active class
+    }
+
+    /**
      * Initial handler of the event, mainly to pass the element object on to updateElementState
      * @param  object   event   JS event
      * @return void
@@ -171,6 +200,25 @@ export default class CharCount {
 
         this.updateElementState();
         // Hand off event element to calculate the remaining characters
+    }
+
+    /**
+     * Updates the internal properties to the latest determined state
+     * @return void
+     */
+    updateElementState() {
+
+        this.inputLength = this.element.value.length;
+        // Update element input length
+
+        this.remainingCharacters = (this.states.fine.threshold - this.inputLength);
+        // Perform count on the element against the limit
+
+        this.determineElementState();
+        // Get the active state determined by the result of the calculation
+
+        this.updateElementCounter();
+        // Update the existing DOM element counter
     }
 
     /**
@@ -258,53 +306,5 @@ export default class CharCount {
             return;
         }
         // Fine state trigger
-    }
-
-    /**
-     * Updates the internal properties to the latest determined state
-     * @return void
-     */
-    updateElementState() {
-
-        this.inputLength = this.element.value.length;
-        // Update element input length
-
-        this.remainingCharacters = (this.states.fine.threshold - this.inputLength);
-        // Perform count on the element against the limit
-
-        this.determineElementState();
-        // Get the active state determined by the result of the calculation
-
-        this.updateElementCounter();
-        // Update the existing DOM element counter
-    }
-
-    /**
-     * Generate the markup to be placed under the element, allow templating?
-     * @return void
-     */
-    createElementCounter() {
-
-        let counterMarkup = `<small class="${this.counterClass} ${this.activeState.colourClass}">${this.remainingCharacters}</small>`;
-        // Generate counter markup
-        // TODO: Allow this to be templated?
-
-        this.element.insertAdjacentHTML('afterend', counterMarkup);
-        // Insert the counter after the element in question
-
-        return this.element.nextElementSibling;
-    }
-
-    /**
-     * Update character count for the elements counter
-     * @return void
-     */
-    updateElementCounter() {
-
-        this.counter.textContent = this.remainingCharacters;
-        // Update remaining characters
-
-        this.counter.className = `${this.counterClass} ${this.activeState.colourClass}`;
-        // Set active class
     }
 }
