@@ -1,5 +1,5 @@
-import State from './CharCountState';
-// import * as Errors from './CharCountErrors';
+import State from './helpers/CharCountState';
+// import * as Errors from './helpers/CharCountErrors';
 
 /**
  * Counts characters, so you don't have to!
