@@ -5,7 +5,7 @@
 import CharCount from './CharCount';
 // Import library
 
-new CharCount({
+window.charCountInstance = new CharCount({ // eslint-disable-line no-unused-vars
 
     onFieldEmpty: (field) => {
 
