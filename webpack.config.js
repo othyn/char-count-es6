@@ -82,7 +82,7 @@ module.exports = env => {
         output: {
             path: outputPath,
             filename: outputFile,
-            library: 'CharCount',
+            library: 'char-count-es6',
             libraryTarget: 'umd',
             umdNamedDefine: true
         },

@@ -1,5 +1,5 @@
 {
-  "name": "char-count",
+  "name": "char-count-es6",
   "version": "1.0.0",
   "description": "A lightweight ES6 library for dealing with character counts on text fields",
   "main": "index.js",
