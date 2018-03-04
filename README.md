@@ -41,10 +41,10 @@ All the following is optional. When initialising the library, the following opti
 #### Callbacks
 A `field` and `remaining` count is always sent to the method. The `field` is the element that called the event, with `remaining` being the current remaining character count of the field away from the expended state.
 - `onFieldEmpty: (field, remaining) => {}` - Fired when a fields text count is zero; not entirely sure on its continued usefulness
-- `onFieldFine = (field, remaining) => {}` - Fired when a fields text remaining count is a-okay, after coming from another state
-- `onFieldWarning = (field, remaining) => {}` - Fired when the desired warning threshold is reached
-- `onFieldDanger = (field, remaining) => {}` - Fired when the desired danger threshold is reached
-- `onFieldExpended = (field, remaining) => {}` - Fired when the remainder is all used up!
+- `onFieldFine: (field, remaining) => {}` - Fired when a fields text remaining count is a-okay, after coming from another state
+- `onFieldWarning: (field, remaining) => {}` - Fired when the desired warning threshold is reached
+- `onFieldDanger: (field, remaining) => {}` - Fired when the desired danger threshold is reached
+- `onFieldExpended: (field, remaining) => {}` - Fired when the remainder is all used up!
 
 For example implementation of this, see `src/example.app.js`
 
