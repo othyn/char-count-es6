@@ -1,7 +1,7 @@
 # CharCount
 A lightweight (~7KB min) ES6 library for dealing with character counts on text fields, providing events, live counters and more!
 
-![example usage](example.gif)
+<p align="center"><img src="example.gif" alt="example usage"/></p>
 
 An interactive preview can be found on the [GitHub page for this project]().
 
