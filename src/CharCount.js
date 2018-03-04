@@ -95,7 +95,7 @@ export default class CharCount {
         this.onFieldExpended = onFieldExpended;
         // Register callbacks
 
-        this.bindElement(this.element);
+        this.bindElement();
         // Bind the class to the element
     }
 
@@ -148,15 +148,14 @@ export default class CharCount {
 
     /**
      * Bind the required events onto the element / determine initial state
-     * @param  object   element   DOM element
      * @return void
      */
-    bindElement(element) {
+    bindElement() {
 
-        element.addEventListener('input', this.handleInputEvent.bind(this));
+        this.element.addEventListener('input', this.handleInputEvent.bind(this));
         // Register the event listener to the DOM elements required
 
-        this.calculateRemainingCharacters(element);
+        this.calculateRemainingCharacters(this.element);
         // Calculate initial counts for each element
     }
 
