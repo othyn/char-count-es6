@@ -25,7 +25,7 @@ export default class CharCount {
         // TODO: Potentially look at percentages as well as fixed figures?
 
         selector = 'cc-field',
-        classCounter = 'cc-count',
+        counterClass = 'cc-count',
         // DOM interaction classes
 
         classStateIsEmpty = 'cc-is-empty',
@@ -81,13 +81,15 @@ export default class CharCount {
         };
         // Define states
 
-        this.activeState = null;
+        this.activeState = this.states.empty;
         this.inputLength = this.element.value.length;
         this.remainingCharacters = limit;
         // Store current state properties
 
-        this.classCounter = classCounter;
-        // Setup DOM interaction classes
+        this.counterClass = counterClass;
+        this.counter = this.createFieldCounter();
+        // Setup DOM counter
+        // TODO: Allow for this to be situated at a custom location
 
         this.onFieldEmpty = onFieldEmpty;
         this.onFieldFine = onFieldFine;
@@ -273,20 +275,8 @@ export default class CharCount {
         this.determineFieldState();
         // Get the active state determined by the result of the calculation
 
-        let potentialFieldCounter = this.element.nextElementSibling;
-        // Get the next element to check for counters existence
-        // TODO: Allow for elements that aren't situated directly below element
-
-        if (potentialFieldCounter === null || !potentialFieldCounter.matches(`.${this.classCounter}`)) {
-
-            this.createFieldCounter();
-            // Create element counter if there isn't one on the DOM
-
-        } else {
-
-            this.updateFieldCounter(potentialFieldCounter);
-            // Update the existing DOM element counter
-        }
+        this.updateFieldCounter();
+        // Update the existing DOM element counter
     }
 
     /**
@@ -295,25 +285,26 @@ export default class CharCount {
      */
     createFieldCounter() {
 
-        let counterMarkup = `<small class="${this.classCounter} ${this.activeState.colourClass}">${this.remainingCharacters}</small>`;
+        let counterMarkup = `<small class="${this.counterClass} ${this.activeState.colourClass}">${this.remainingCharacters}</small>`;
         // Generate counter markup
         // TODO: Allow this to be templated?
 
         this.element.insertAdjacentHTML('afterend', counterMarkup);
         // Insert the counter after the field in question
+
+        return this.element.nextElementSibling;
     }
 
     /**
      * Update internal character count for the fields counter
-     * @param  object   fieldCounter   JS element object
      * @return void
      */
-    updateFieldCounter(fieldCounter) {
+    updateFieldCounter() {
 
-        fieldCounter.textContent = this.remainingCharacters;
+        this.counter.textContent = this.remainingCharacters;
         // Update remaining characters
 
-        fieldCounter.className = `${this.classCounter} ${this.activeState.colourClass}`;
+        this.counter.className = `${this.counterClass} ${this.activeState.colourClass}`;
         // Set active class
     }
 }
