@@ -1,4 +1,6 @@
 # CharCount
+[![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/char-count-es6)
+
 A lightweight (~7KB min) ES6 library for dealing with character counts on text fields, providing events, live counters and more!
 
 <p align="center"><img src="example.gif" alt="example usage"/></p>
