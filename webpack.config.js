@@ -46,7 +46,7 @@ module.exports = env => {
         // Build example app
 
         outputFile = 'example.app.js';
-        outputPath = path.resolve('./dev');
+        outputPath = path.resolve('./docs');
         // Dev build location/file
 
         rules.push({
@@ -100,7 +100,7 @@ module.exports = env => {
         devServer: {
             publicPath: '/',
             port: 8080,
-            contentBase: path.resolve('./dev'),
+            contentBase: path.resolve('./docs'),
             host: 'localhost',
             historyApiFallback: true,
             noInfo: false,
