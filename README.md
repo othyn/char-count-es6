@@ -12,7 +12,9 @@ Based on this, events are fired to allow utilisation of that fact and a counter 
 `$ npm install char-count --save-dev`
 
 ### Via download
-Download the minified source from `dist` and include in your project via `<script src="/path/to/charcount.min.js"></script>`
+Download the minified source from `dist` and include in your project via
+
+`<script src="/path/to/charcount.min.js"></script>`
 
 ## Usage
 To begin, import the ES6 library where required `import CharCount from 'CharCount';`
