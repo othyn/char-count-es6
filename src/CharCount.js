@@ -70,7 +70,7 @@ export default class CharCount {
         limit = (this.element.hasAttribute('maxlength')
             ? parseInt(this.element.getAttribute('maxlength'))
             : limit);
-        // If there is a max length applied to the field, use that instead
+        // If there is a max length applied to the element, use that instead
 
         this.states = {
             empty: new State(0, classStateIsEmpty),
@@ -87,7 +87,7 @@ export default class CharCount {
         // Store current state properties
 
         this.counterClass = counterClass;
-        this.counter = this.createFieldCounter();
+        this.counter = this.createElementCounter();
         // Setup DOM counter
         // TODO: Allow for this to be situated at a custom location
 
@@ -177,7 +177,7 @@ export default class CharCount {
      * Determine the element state, with the intention to fire events/manage active state
      * @return void
      */
-    determineFieldState() {
+    determineElementState() {
 
         if (this.inputLength === 0) {
 
@@ -272,34 +272,34 @@ export default class CharCount {
         this.remainingCharacters = (this.states.fine.threshold - this.inputLength);
         // Perform count on the element against the limit
 
-        this.determineFieldState();
+        this.determineElementState();
         // Get the active state determined by the result of the calculation
 
-        this.updateFieldCounter();
+        this.updateElementCounter();
         // Update the existing DOM element counter
     }
 
     /**
-     * Generate the markup to be placed under the field, allow templating?
+     * Generate the markup to be placed under the element, allow templating?
      * @return void
      */
-    createFieldCounter() {
+    createElementCounter() {
 
         let counterMarkup = `<small class="${this.counterClass} ${this.activeState.colourClass}">${this.remainingCharacters}</small>`;
         // Generate counter markup
         // TODO: Allow this to be templated?
 
         this.element.insertAdjacentHTML('afterend', counterMarkup);
-        // Insert the counter after the field in question
+        // Insert the counter after the element in question
 
         return this.element.nextElementSibling;
     }
 
     /**
-     * Update internal character count for the fields counter
+     * Update character count for the elements counter
      * @return void
      */
-    updateFieldCounter() {
+    updateElementCounter() {
 
         this.counter.textContent = this.remainingCharacters;
         // Update remaining characters
