@@ -81,9 +81,10 @@ export default class CharCount {
         };
         // Define states
 
-        // this.activeState = null;
-        // this.remainingCharacters = limit;
-        // TODO: Implement when not singleton
+        this.activeState = null;
+        this.inputLength = this.element.value.length;
+        this.remainingCharacters = limit;
+        // Store current state properties
 
         this.classCounter = classCounter;
         // Setup DOM interaction classes
@@ -155,7 +156,7 @@ export default class CharCount {
         this.element.addEventListener('input', this.handleInputEvent.bind(this));
         // Register the event listener to the DOM elements required
 
-        this.calculateRemainingCharacters(this.element);
+        this.calculateRemainingCharacters();
         // Calculate initial counts for each element
     }
 
@@ -166,166 +167,153 @@ export default class CharCount {
      */
     handleInputEvent(event) {
 
-        this.calculateRemainingCharacters(event.target);
+        this.calculateRemainingCharacters();
         // Hand off event element to calculate the remaining characters
     }
 
     /**
-     * Determine the field state, with the intention to fire events/manage active state
-     * @param  object   field   JS element object
-     * @return state
+     * Determine the element state, with the intention to fire events/manage active state
+     * @return void
      */
-    determineFieldState(field) {
+    determineFieldState() {
 
-        let remaining   = field.ccRemainingCharacters,
-            fieldState  = field.ccActiveState,
-            fieldLength = field.value.length;
-        // Local storage
+        if (this.inputLength === 0) {
 
-        if (fieldLength === 0) {
+            if (!this.states.empty.isActive()) {
 
-            if (fieldState !== 'empty') {
+                this.onFieldEmpty(this.element, this.remainingCharacters);
 
-                this.onFieldEmpty(field, remaining);
+                this.states.empty.isActive(true);
 
-                field.ccActiveState = 'empty';
+                this.activeState = this.states.empty;
             }
             // Fire callback, set active state
 
-            return this.states.empty;
+            return;
         }
         // Empty state trigger
 
-        if (remaining <= this.states.expended.threshold) {
+        if (this.remainingCharacters <= this.states.expended.threshold) {
 
-            // if (!this.states.expended.isActive()) {
+            if (!this.states.expended.isActive()) {
 
-            //     this.onFieldExpended(field, remaining);
+                this.onFieldExpended(this.element, this.remainingCharacters);
 
-            //     this.states.expended.isActive(true);
-            // }
-            // TODO: Do this method when not singleton
+                this.states.expended.isActive(true);
 
-            if (fieldState !== 'expended') {
-
-                this.onFieldExpended(field, remaining);
-
-                field.ccActiveState = 'expended';
-
+                this.activeState = this.states.expended;
             }
             // Fire callback, set active state
 
-            return this.states.expended;
+            return;
         }
         // Limit state trigger
 
-        if (remaining <= this.states.danger.threshold) {
+        if (this.remainingCharacters <= this.states.danger.threshold) {
 
-            if (fieldState !== 'danger') {
+            if (!this.states.danger.isActive()) {
 
-                this.onFieldDanger(field, remaining);
+                this.onFieldDanger(this.element, this.remainingCharacters);
 
-                field.ccActiveState = 'danger';
+                this.states.danger.isActive(true);
+
+                this.activeState = this.states.danger;
             }
             // Fire callback, set active state
 
-            return this.states.danger;
+            return;
         }
         // Danger state trigger
 
-        if (remaining <= this.states.warning.threshold) {
+        if (this.remainingCharacters <= this.states.warning.threshold) {
 
-            if (fieldState !== 'warning') {
+            if (!this.states.warning.isActive()) {
 
-                this.onFieldWarning(field, remaining);
+                this.onFieldWarning(this.element, this.remainingCharacters);
 
-                field.ccActiveState = 'warning';
+                this.states.warning.isActive(true);
+
+                this.activeState = this.states.warning;
             }
             // Fire callback, set active state
 
-            return this.states.warning;
+            return;
         }
         // Warning state trigger
 
-        if (remaining <= this.states.fine.threshold) {
+        if (this.remainingCharacters <= this.states.fine.threshold) {
 
-            if (fieldState !== 'fine') {
+            if (!this.states.fine.isActive()) {
 
-                this.onFieldFine(field, remaining);
+                this.onFieldFine(this.element, this.remainingCharacters);
 
-                field.ccActiveState = 'fine';
+                this.states.fine.isActive(true);
+
+                this.activeState = this.states.fine;
             }
             // Fire callback, set active state
 
-            return this.states.fine;
+            return;
         }
         // Fine state trigger
     }
 
     /**
      * Calculates remaining characters but will also need to fire callbacks
-     * @param  object   field   JS element object
      * @return void
      */
-    calculateRemainingCharacters(field) {
+    calculateRemainingCharacters() {
 
-        field.ccRemainingCharacters = (this.states.fine.threshold - field.value.length);
-        // Perform count on the field against the limit
+        this.inputLength = this.element.value.length;
+        // Update element input length
 
-        let activeState = this.determineFieldState(field);
+        this.remainingCharacters = (this.states.fine.threshold - this.inputLength);
+        // Perform count on the element against the limit
+
+        this.determineFieldState();
         // Get the active state determined by the result of the calculation
 
-        let potentialFieldCounter = field.nextElementSibling;
+        let potentialFieldCounter = this.element.nextElementSibling;
         // Get the next element to check for counters existence
-        // TODO: Allow for elements that aren't situated directly below field
+        // TODO: Allow for elements that aren't situated directly below element
 
         if (potentialFieldCounter === null || !potentialFieldCounter.matches(`.${this.classCounter}`)) {
 
-            this.createFieldCounter(field, activeState);
-            // Create field counter if there isn't one on the DOM
+            this.createFieldCounter();
+            // Create element counter if there isn't one on the DOM
 
         } else {
 
-            this.updateFieldCounter(field, potentialFieldCounter, activeState);
-            // Update the existing DOM field counter
+            this.updateFieldCounter(potentialFieldCounter);
+            // Update the existing DOM element counter
         }
     }
 
     /**
      * Generate the markup to be placed under the field, allow templating?
-     * @param  object   field         JS element object
-     * @param  object   activeState   Active State
      * @return void
      */
-    createFieldCounter(field, activeState) {
+    createFieldCounter() {
 
-        let activeColourClass = activeState.colourClass;
-        // Go get the active colour class
-
-        let counterMarkup = `<small class="${this.classCounter} ${activeColourClass}">${field.ccRemainingCharacters}</small>`;
+        let counterMarkup = `<small class="${this.classCounter} ${this.activeState.colourClass}">${this.remainingCharacters}</small>`;
         // Generate counter markup
         // TODO: Allow this to be templated?
 
-        field.insertAdjacentHTML('afterend', counterMarkup);
+        this.element.insertAdjacentHTML('afterend', counterMarkup);
         // Insert the counter after the field in question
     }
 
     /**
      * Update internal character count for the fields counter
-     * @param  object   field          JS element object
      * @param  object   fieldCounter   JS element object
-     * @param  object   activeState    Active State
      * @return void
      */
-    updateFieldCounter(field, fieldCounter, activeState) {
+    updateFieldCounter(fieldCounter) {
 
-        let activeColourClass = activeState.colourClass;
-        // Go get the active colour class
-
-        fieldCounter.textContent = field.ccRemainingCharacters;
+        fieldCounter.textContent = this.remainingCharacters;
         // Update remaining characters
 
-        fieldCounter.className = `${this.classCounter} ${activeColourClass}`;
+        fieldCounter.className = `${this.classCounter} ${this.activeState.colourClass}`;
         // Set active class
     }
 }

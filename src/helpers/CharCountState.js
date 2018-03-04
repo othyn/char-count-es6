@@ -14,7 +14,7 @@ export default class CharCountState {
         this._colourClass = colourClass;
         // Init
 
-        //this._active = false;
+        this._active = false;
         // State current state
     }
 
@@ -65,11 +65,11 @@ export default class CharCountState {
      * @param  boolean  newState    update the state instance state
      * @return boolean              return the current state instance state
      */
-    // isActive(newState = null) {
+    isActive(newState = null) {
 
-    //     if (newState !== null)
-    //         this._active = newState;
+        if (newState !== null)
+            this._active = newState;
 
-    //     return this.active;
-    // }
+        return this.active;
+    }
 }
