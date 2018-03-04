@@ -1,0 +1,17 @@
+/*
+ * This should help with customisation...
+ */
+
+$class-counter: 'cc-count';
+$class-counter-empty: 'cc-is-empty';
+$class-counter-fine: 'cc-is-fine';
+$class-counter-warning: 'cc-is-warning';
+$class-counter-danger: 'cc-is-danger';
+$class-counter-expended: 'cc-is-expended';
+// These need to mirror any custom classes used in library init
+
+$colour-white:   #FFFFFF !important;
+$colour-muted:   #6C757D !important; // BS4 muted
+$colour-warning: #FFC107 !important; // BS4 warning
+$colour-danger:  #DC3545 !important; // BS4 danger
+// Colours

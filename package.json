@@ -1,0 +1,49 @@
+{
+  "name": "char-count",
+  "version": "1.0.0",
+  "description": "A lightweight ES6 library for dealing with character counts on text fields",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --env dev --progress --colors --hide-modules --display-error-details",
+    "watch": "webpack --env dev --progress --colors --hide-modules --watch",
+    "hot": "webpack-dev-server --inline --hot",
+    "prod": "webpack --env prod --no-progress --hide-modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/othyn/char-count.git"
+  },
+  "keywords": [
+    "js",
+    "es6",
+    "library",
+    "character",
+    "count",
+    "text",
+    "field"
+  ],
+  "author": "Ben Tindall",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/othyn/char-count/issues"
+  },
+  "homepage": "https://github.com/othyn/char-count#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "clean-webpack-plugin": "^0.1.18",
+    "css-loader": "^0.28.10",
+    "eslint": "^4.17.0",
+    "eslint-loader": "^1.9.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "node-sass": "^4.7.2",
+    "postcss-loader": "^2.1.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.20.2",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1"
+  }
+}

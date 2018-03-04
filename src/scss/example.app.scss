@@ -1,0 +1,46 @@
+/*
+ * Just some example styling to get you going...
+ * Styling is done with Bootstrap 4 in mind, as that
+ * is used in the dev area. Play around to your hearts
+ * content <3
+ */
+
+@import 'variables';
+// Application variables
+
+.#{$class-counter} {
+    display: block;
+    float: right;
+    transition: color .2s ease-in-out;
+}
+// Counter style
+
+.#{$class-counter}.#{$class-counter-empty} {
+    color: $colour-muted;
+}
+// Empty colour
+
+.#{$class-counter}.#{$class-counter-fine} {
+    color: $colour-muted;
+}
+// Fine colour
+
+.#{$class-counter}.#{$class-counter-warning} {
+    color: $colour-warning;
+}
+// Warning colour
+
+.#{$class-counter}.#{$class-counter-danger} {
+    color: $colour-danger;
+}
+// Danger colour
+
+.#{$class-counter}.#{$class-counter-expended} {
+    color: $colour-white;
+    background-color: $colour-danger;
+    border-radius: 2px;
+    padding: 2px;
+    line-height: 1;
+    margin-top: 4px;
+}
+// Expended style

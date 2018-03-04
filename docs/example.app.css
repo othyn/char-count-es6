@@ -1,0 +1,35 @@
+/*
+ * Just some example styling to get you going...
+ * Styling is done with Bootstrap 4 in mind, as that
+ * is used in the dev area. Play around to your hearts
+ * content <3
+ */
+/*
+ * This should help with customisation...
+ */
+.cc-count {
+  display: block;
+  float: right;
+  transition: color .2s ease-in-out; }
+
+.cc-count.cc-is-empty {
+  color: #6C757D !important; }
+
+.cc-count.cc-is-fine {
+  color: #6C757D !important; }
+
+.cc-count.cc-is-warning {
+  color: #FFC107 !important; }
+
+.cc-count.cc-is-danger {
+  color: #DC3545 !important; }
+
+.cc-count.cc-is-expended {
+  color: #FFFFFF !important;
+  background-color: #DC3545 !important;
+  border-radius: 2px;
+  padding: 2px;
+  line-height: 1;
+  margin-top: 4px; }
+
+/*# sourceMappingURL=example.app.css.map*/

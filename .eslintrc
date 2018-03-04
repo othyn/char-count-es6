@@ -1,0 +1,42 @@
+// Auto generated:
+// $ npm install -g eslint
+// $ eslint init
+// Follow the onscreen instructions...
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "no-unused-vars": [
+            "error", {
+                "args": "none"
+            }
+        ],
+        "no-console": [
+            "error", {
+                "allow": ["log", "warn", "error"]
+            }
+        ]
+    }
+}
