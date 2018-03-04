@@ -135,7 +135,7 @@ export default class CharCount {
             Array.from(elements, el => {
 
                 this.instances.push( new CharCount({selector: el}) );
-                // TODO: Need to pass through parameters
+                // FIXME: Need to pass through parameters
 
             });
             // Create a new instance for each element, storing the initialised in this instance
@@ -158,18 +158,18 @@ export default class CharCount {
         this.element.addEventListener('input', this.handleInputEvent.bind(this));
         // Register the event listener to the DOM elements required
 
-        this.calculateRemainingCharacters();
+        this.updateElementState();
         // Calculate initial counts for each element
     }
 
     /**
-     * Initial handler of the event, mainly to pass the element object on to calculateRemainingCharacters
+     * Initial handler of the event, mainly to pass the element object on to updateElementState
      * @param  object   event   JS event
      * @return void
      */
     handleInputEvent(event) {
 
-        this.calculateRemainingCharacters();
+        this.updateElementState();
         // Hand off event element to calculate the remaining characters
     }
 
@@ -261,10 +261,10 @@ export default class CharCount {
     }
 
     /**
-     * Calculates remaining characters but will also need to fire callbacks
+     * Updates the internal properties to the latest determined state
      * @return void
      */
-    calculateRemainingCharacters() {
+    updateElementState() {
 
         this.inputLength = this.element.value.length;
         // Update element input length
