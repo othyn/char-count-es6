@@ -35,7 +35,7 @@
 }
 // Danger colour
 
-.#{$class-counter}.#{$class-counter-limit} {
+.#{$class-counter}.#{$class-counter-expended} {
     color: $colour-white;
     background-color: $colour-danger;
     border-radius: 2px;
@@ -43,4 +43,4 @@
     line-height: 1;
     margin-top: 4px;
 }
-// Over limit style
+// Expended style
