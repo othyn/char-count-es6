@@ -3,8 +3,6 @@ import State from './helpers/CharCountState';
 
 /**
  * Counts characters, so you don't have to!
- *
- * TODO: Currently Singleton, this would greatly benefit from an instance per element
  */
 export default class CharCount {
 
