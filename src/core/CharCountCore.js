@@ -24,7 +24,7 @@ export default class CharCountCore {
 
         warningThreshold: warning = 25,
         dangerThreshold: danger = 10,
-        limitThreshold: limit = 100,
+        expendedThreshold: limit = 100,
         // Threshold values
         // TODO: Potentially look at percentages as well as fixed figures?
 
