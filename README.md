@@ -67,7 +67,7 @@ When you first clone the project, run `npm install` from the project directory t
 #### NPM Scripts
 - `npm run dev` - Build the development environment files, this is `example.app.js` to the `docs` directory
 - `npm run watch` - The usual watch script to automatically build the `dev` environment
-- `npm run hot` - Runs a webpack dev server at `localhost:8080` from the `docs` directory
+- `npm run hot` - Runs a webpack dev server at `localhost:8080` from the `docs` directory, with hot module reloading
 - `npm run prod` - Builds the project out to the minified `charcount.min.js` in the `dist` directory
 
 #### Project Structure

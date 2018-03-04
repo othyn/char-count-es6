@@ -2,18 +2,18 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("CharCount", [], factory);
+		define("char-count-es6", [], factory);
 	else if(typeof exports === 'object')
-		exports["CharCount"] = factory();
+		exports["char-count-es6"] = factory();
 	else
-		root["CharCount"] = factory();
+		root["char-count-es6"] = factory();
 })(typeof self !== 'undefined' ? self : this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	function hotDisposeChunk(chunkId) {
 /******/ 		delete installedChunks[chunkId];
 /******/ 	}
-/******/ 	var parentHotUpdateCallback = window["webpackHotUpdateCharCount"];
-/******/ 	window["webpackHotUpdateCharCount"] = 
+/******/ 	var parentHotUpdateCallback = window["webpackHotUpdatechar_count_es6"];
+/******/ 	window["webpackHotUpdatechar_count_es6"] = 
 /******/ 	function webpackHotUpdateCallback(chunkId, moreModules) { // eslint-disable-line no-unused-vars
 /******/ 		hotAddUpdateChunk(chunkId, moreModules);
 /******/ 		if(parentHotUpdateCallback) parentHotUpdateCallback(chunkId, moreModules);
@@ -71,7 +71,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f7fd0044fc2d90ccbf81"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ecb19a3391aa6c00c222"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -750,17 +750,17 @@ module.exports = __webpack_require__(5);
 "use strict";
 
 
-var _CharCountFactory = __webpack_require__(2);
+var _CharCount = __webpack_require__(2);
 
-var _CharCountFactory2 = _interopRequireDefault(_CharCountFactory);
+var _CharCount2 = _interopRequireDefault(_CharCount);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Import library
 
-window.charCountInstance = new _CharCountFactory2.default({ // eslint-disable-line no-unused-vars
+window.charCountInstance = new _CharCount2.default({ // eslint-disable-line no-unused-vars
 
-    onFieldEmpty: function onFieldEmpty(field) {
+    onFieldEmpty: function onFieldEmpty(field, count) {
 
         console.log('onFieldEmpty');
 
@@ -768,7 +768,7 @@ window.charCountInstance = new _CharCountFactory2.default({ // eslint-disable-li
         // Reset Bootstrap form state
     },
 
-    onFieldFine: function onFieldFine(field) {
+    onFieldFine: function onFieldFine(field, count) {
 
         console.log('onFieldFine');
 
@@ -828,78 +828,97 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * Entry point for CharCount initialisation
+ * Factory (& entry point) for CharCount instantiation
  */
-var CharCountFactory = function () {
+var CharCount = function () {
 
     /**
      * constructor
-     * @param  object   Config to initialise the class with
-     * @return void
+     * @param  {object} Config to initialise the class with
+     * @return {void}
      */
-    function CharCountFactory(options) {
-        _classCallCheck(this, CharCountFactory);
+    function CharCount(options) {
+        _classCallCheck(this, CharCount);
+
+        this.options = Object.assign({ selector: 'cc-field' }, options);
+        // Options to init all instances with
 
         this.instances = [];
-        // Stores all active instances of the class if a DOM class is provided
+        // Stores all active instances for reference
 
-        this.element = this.findElement(selector);
+        this.initElements();
         // Initialisation depends on the outcome of the type of selector passed
+
+        delete this.options;
     }
 
     /**
-     * Finds the element to be bound to the class
-     * @param  object || string     selector   DOM element, ID or class
-     * @return object || boolean
+     * Finds the elements based on the selector passed and initialises a class against them
+     * @return {void}
      */
 
 
-    _createClass(CharCountFactory, [{
-        key: 'findElement',
-        value: function findElement(selector) {
+    _createClass(CharCount, [{
+        key: 'initElements',
+        value: function initElements() {
             var _this = this;
 
-            // Conditional assignments won't get passed eslint, event with "no-cond-assign" set
-            // So unsure whether its good practice in JS. I just miss if (let ...) ...
+            if (this.options.selector && this.options.selector.nodeType === Node.ELEMENT_NODE) {
 
-            if (selector && selector.nodeType === Node.ELEMENT_NODE) {
+                // Element passed, go straight to init - because why not?
 
-                // Element passed, this usually means that the class has been initialised internally
-
-                return selector;
-            } else if (document.getElementById(selector) !== null) {
+                this.createInstance(this.options.selector);
+            } else if (document.getElementById(this.options.selector) !== null) {
 
                 // ID passed, go ahead and initialise this instance only against the requested element
 
-                return document.getElementById(selector);
-            } else if (document.getElementsByClassName(selector).length !== 0) {
+                this.createInstance(document.getElementById(this.options.selector));
+            } else if (document.getElementsByClassName(this.options.selector).length !== 0) {
 
-                // Class passed, go ahead and initialise all instances by element and store references
-                // in this instance
+                // Class passed, go ahead and initialise all instances by element
 
-                var elements = document.getElementsByClassName(selector);
+                var elements = document.getElementsByClassName(this.options.selector);
                 // Pull all DOM elements to initialise into an HTMLCollection
 
                 Array.from(elements, function (el) {
 
-                    _this.instances.push(new CharCount({ selector: el }));
-                    // FIXME: Need to pass through parameters
+                    _this.createInstance(el);
                 });
-                // Create a new instance for each element, storing the initialised in this instance
-
-                return false;
+                // Create a new instance for each element
             } else {
 
-                return console.warn('No elements found with supplied selector', this.selector);
+                console.warn('No elements found with supplied selector:', this.options.selector);
             }
             // Determine what the instance needs to initialise as
         }
+
+        /**
+         * Create the required instances from the init options and sourced element
+         * @param {object}  element DOM element to init the class instance against
+         * @return {void}
+         */
+
+    }, {
+        key: 'createInstance',
+        value: function createInstance(element) {
+
+            var params = Object.assign({ element: element }, this.options);
+            // Core class requires initialisation via element, so pass it on in there!
+
+            var newInstance = new _CharCountCore2.default(params);
+
+            this.instances.push(newInstance);
+            // For reference in returned factory instance
+
+            element.CharCount = newInstance;
+            // Register the instance against the element directly
+        }
     }]);
 
-    return CharCountFactory;
+    return CharCount;
 }();
 
-exports.default = CharCountFactory;
+exports.default = CharCount;
 
 /***/ }),
 /* 3 */
@@ -922,7 +941,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// import * as Errors from './helpers/CharCountErrors';
+// import * as Errors from '../helpers/CharCountErrors';
 
 /**
  * Counts characters, so you don't have to!
@@ -931,19 +950,19 @@ var CharCountCore = function () {
 
     /**
      * constructor
-     * @param  object   Config to initialise the class with
-     * @return void
+     * @param  {object} Config to initialise the class with
+     * @return {void}
      */
     function CharCountCore() {
         var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+            _ref$element = _ref.element,
+            element = _ref$element === undefined ? null : _ref$element,
             _ref$warningThreshold = _ref.warningThreshold,
             warning = _ref$warningThreshold === undefined ? 25 : _ref$warningThreshold,
             _ref$dangerThreshold = _ref.dangerThreshold,
             danger = _ref$dangerThreshold === undefined ? 10 : _ref$dangerThreshold,
-            _ref$limitThreshold = _ref.limitThreshold,
-            limit = _ref$limitThreshold === undefined ? 100 : _ref$limitThreshold,
-            _ref$selector = _ref.selector,
-            selector = _ref$selector === undefined ? 'cc-field' : _ref$selector,
+            _ref$expendedThreshol = _ref.expendedThreshold,
+            limit = _ref$expendedThreshol === undefined ? 100 : _ref$expendedThreshol,
             _ref$counterClass = _ref.counterClass,
             counterClass = _ref$counterClass === undefined ? 'cc-count' : _ref$counterClass,
             _ref$emptyClass = _ref.emptyClass,
@@ -969,15 +988,10 @@ var CharCountCore = function () {
 
         _classCallCheck(this, CharCountCore);
 
-        this.instances = [];
-        // Stores all active instances of the class if a DOM class is provided
+        if (element === null) console.error('Error initialising element!');
 
-        this.element = this.findElement(selector);
-        // Initialisation depends on the outcome of the type of selector passed
-
-        if (!this.element) return;
-        // The selector was a class
-        // Initialising each instance has been handled, no need to go further for this instance
+        this.element = element;
+        // Element that the class instantiation is in reference to
 
         limit = this.element.hasAttribute('maxlength') ? parseInt(this.element.getAttribute('maxlength')) : limit;
         // If there is a max length applied to the element, use that instead
@@ -1013,75 +1027,12 @@ var CharCountCore = function () {
     }
 
     /**
-     * Finds the element to be bound to the class
-     * @param  object || string     selector   DOM element, ID or class
-     * @return object || boolean
+     * Generate the markup to be placed under the element, allow templating?
+     * @return {void}
      */
 
 
     _createClass(CharCountCore, [{
-        key: 'findElement',
-        value: function findElement(selector) {
-            var _this = this;
-
-            // Conditional assignments won't get passed eslint, event with "no-cond-assign" set
-            // So unsure whether its good practice in JS. I just miss if (let ...) ...
-
-            if (selector && selector.nodeType === Node.ELEMENT_NODE) {
-
-                // Element passed, this usually means that the class has been initialised internally
-
-                return selector;
-            } else if (document.getElementById(selector) !== null) {
-
-                // ID passed, go ahead and initialise this instance only against the requested element
-
-                return document.getElementById(selector);
-            } else if (document.getElementsByClassName(selector).length !== 0) {
-
-                // Class passed, go ahead and initialise all instances by element and store references
-                // in this instance
-
-                var elements = document.getElementsByClassName(selector);
-                // Pull all DOM elements to initialise into an HTMLCollection
-
-                Array.from(elements, function (el) {
-
-                    _this.instances.push(new CharCount({ selector: el }));
-                    // FIXME: Need to pass through parameters
-                });
-                // Create a new instance for each element, storing the initialised in this instance
-
-                return false;
-            } else {
-
-                return console.warn('No elements found with supplied selector', this.selector);
-            }
-            // Determine what the instance needs to initialise as
-        }
-
-        /**
-         * Bind the required events onto the element / determine initial state
-         * @return void
-         */
-
-    }, {
-        key: 'bindElement',
-        value: function bindElement() {
-
-            this.element.addEventListener('input', this.handleInputEvent.bind(this));
-            // Register the event listener to the DOM elements required
-
-            this.updateElementState();
-            // Calculate initial counts for each element
-        }
-
-        /**
-         * Generate the markup to be placed under the element, allow templating?
-         * @return void
-         */
-
-    }, {
         key: 'createElementCounter',
         value: function createElementCounter() {
 
@@ -1097,7 +1048,7 @@ var CharCountCore = function () {
 
         /**
          * Update character count for the elements counter
-         * @return void
+         * @return {void}
          */
 
     }, {
@@ -1112,8 +1063,24 @@ var CharCountCore = function () {
         }
 
         /**
+         * Bind the required events onto the element / determine initial state
+         * @return {void}
+         */
+
+    }, {
+        key: 'bindElement',
+        value: function bindElement() {
+
+            this.element.addEventListener('input', this.handleInputEvent.bind(this));
+            // Register the event listener to the DOM elements required
+
+            this.updateElementState();
+            // Calculate initial counts for each element
+        }
+
+        /**
          * Initial handler of the event
-         * @return void
+         * @return {void}
          */
 
     }, {
@@ -1126,7 +1093,7 @@ var CharCountCore = function () {
 
         /**
          * Updates the internal properties to the latest determined state
-         * @return void
+         * @return {void}
          */
 
     }, {
@@ -1148,7 +1115,7 @@ var CharCountCore = function () {
 
         /**
          * Determine the element state, with the intention to fire events/manage active state
-         * @return void
+         * @return {void}
          */
 
     }, {
@@ -1264,8 +1231,9 @@ var CharCountState = function () {
 
     /**
      * constructor
-     * @param  object   Config to initialise the class with
-     * @return void
+     * @param  {int}    threshold   Element input length threshold for state
+     * @param  {string} colourClass DOM class that state declares as
+     * @return {void}
      */
     function CharCountState() {
         var threshold = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
@@ -1283,7 +1251,7 @@ var CharCountState = function () {
 
     /**
      * Get the threshold value for the state instance
-     * @return int  _threshold  value
+     * @return {int}    _threshold  value
      */
 
 
@@ -1293,8 +1261,8 @@ var CharCountState = function () {
 
         /**
          * Tells whos asking what the state of the state is. Yuh-huh!
-         * @param  boolean  newState    update the state instance state
-         * @return boolean              return the current state instance state
+         * @param  {boolean}    newState    Update the state instance state
+         * @return {boolean}                Return the current state instance state
          */
         value: function isActive() {
             var newState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -1313,8 +1281,8 @@ var CharCountState = function () {
 
         /**
          * Set the threshold for the state instance
-         * @param  int      threshold   threshold value
-         * @return object   this        just incase you fancy method chaining
+         * @param  {int}    threshold   threshold value
+         * @return {object} this        just incase you fancy method chaining
          */
         ,
         set: function set() {
@@ -1328,7 +1296,7 @@ var CharCountState = function () {
 
         /**
          * Get the colourClass for the state instance
-         * @return string  _colourClass DOM class
+         * @return {string} _colourClass    DOM class
          */
 
     }, {
@@ -1340,8 +1308,8 @@ var CharCountState = function () {
 
         /**
          * Set the colourClass for the state instance
-         * @param  string   colourClass DOM class
-         * @return object   this        just incase you fancy method chaining
+         * @param  {string} colourClass DOM class
+         * @return {object} this        Just incase you fancy method chaining
          */
         ,
         set: function set() {
