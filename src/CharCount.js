@@ -26,11 +26,11 @@ export default class CharCount {
         counterClass = 'cc-count',
         // DOM interaction classes
 
-        classStateIsEmpty = 'cc-is-empty',
-        classStateIsFine = 'cc-is-fine',
-        classStateIsWarning = 'cc-is-warning',
-        classStateIsDanger = 'cc-is-danger',
-        classStateIsExpended = 'cc-is-expended',
+        emptyClass: classStateIsEmpty = 'cc-is-empty',
+        fineClass: classStateIsFine = 'cc-is-fine',
+        warningClass: classStateIsWarning = 'cc-is-warning',
+        dangerClass: classStateIsDanger = 'cc-is-danger',
+        expendedClass: classStateIsExpended = 'cc-is-expended',
         // DOM state classes
 
 
