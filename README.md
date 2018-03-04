@@ -12,6 +12,8 @@ The concept of the library is to define a state that the field is in dependent o
 
 Based on this, events are fired to allow utilisation of that fact and a counter is placed underneath the field to display the remainder of the expended threshold to the user in realtime.
 
+As for the name, the project was going to be called `CharCount` through and through, but due to it being too similar to an existing NPM package, it's had to take the name `char-count-es6` for under the hood stuff. The package itself will always be accessible via the `CharCount` class.
+
 ## Installation
 
 ### Via NPM
