@@ -56,7 +56,21 @@ export default class CharCount {
 
     } = {}) {
 
-        // TODO: Singleton removal, override limit based on maxlength for initd. field
+        this.instances = [];
+        // Stores all active instances of the class
+
+        this.element = this.findElement(selector);
+        // Initialisation depends on the outcome of the type of selector passed
+
+        if (!this.element)
+            return;
+        // The selector was a class
+        // Initialising each instance has been handled, no need to go further for this instance
+
+        limit = (this.element.hasAttribute('maxlength')
+            ? parseInt(this.element.getAttribute('maxlength'))
+            : limit);
+        // If there is a max length applied to the field, use that instead
 
         this.states = {
             empty: new State(0, classStateIsEmpty),
@@ -71,7 +85,6 @@ export default class CharCount {
         // this.remainingCharacters = limit;
         // TODO: Implement when not singleton
 
-        this.selector = selector;
         this.classCounter = classCounter;
         // Setup DOM interaction classes
 
@@ -82,40 +95,38 @@ export default class CharCount {
         this.onFieldExpended = onFieldExpended;
         // Register callbacks
 
-        this.instances = [];
-        // Stores all active instances of the class
-
-        this.findElements();
-        // Start the process to bind the class onto the specified DOM element(s)
+        this.bindElement(this.element);
+        // Bind the class to the element
     }
 
     /**
-     * Finds the elements to be bound to the class
-     * @return void
+     * Finds the element to be bound to the class
+     * @param  object || string     selector   DOM element, ID or class
+     * @return object || boolean
      */
-    findElements() {
+    findElement(selector) {
 
         // Conditional assignments won't get passed eslint, event with "no-cond-assign" set
         // So unsure whether its good practice in JS. I just miss if (let ...) ...
 
-        if (this.selector && this.selector.nodeType === Node.ELEMENT_NODE) {
+        if (selector && selector.nodeType === Node.ELEMENT_NODE) {
 
             // Element passed, this usually means that the class has been initialised internally
 
-            this.bindElement(this.selector);
+            return selector;
 
-        } else if (document.getElementById(this.selector) !== null) {
+        } else if (document.getElementById(selector) !== null) {
 
             // ID passed, go ahead and initialise this instance only against the requested element
 
-            this.bindElement( document.getElementById(this.selector) );
+            return document.getElementById(selector);
 
-        } else if (document.getElementsByClassName(this.selector).length !== 0) {
+        } else if (document.getElementsByClassName(selector).length !== 0) {
 
             // Class passed, go ahead and initialise all instances by element and store references
             // in this instance
 
-            let elements = document.getElementsByClassName(this.selector);
+            let elements = document.getElementsByClassName(selector);
             // Pull all DOM elements to initialise into an HTMLCollection
 
             Array.from(elements, el => {
@@ -125,6 +136,8 @@ export default class CharCount {
 
             });
             // Create a new instance for each element, storing the initialised in this instance
+
+            return false;
 
         } else {
 
@@ -257,11 +270,7 @@ export default class CharCount {
      */
     calculateRemainingCharacters(field) {
 
-        let limit = (field.hasAttribute('maxlength') ? parseInt(field.getAttribute('maxlength')) : this.states.fine.threshold);
-        // If there is a max length applied to the field, use that instead
-        // TODO: Allow for toggling this behaviour via config
-
-        field.ccRemainingCharacters = (limit - field.value.length);
+        field.ccRemainingCharacters = (this.states.fine.threshold - field.value.length);
         // Perform count on the field against the limit
 
         let activeState = this.determineFieldState(field);
