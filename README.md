@@ -52,8 +52,25 @@ A `field` and `remaining` count is always sent to the method. The `field` is the
 
 For example implementation of this, see `src/example.app.js`
 
-## Contributing
+## Contributing & Development
 If you wish to contribute, please just fork and play around! If you have any changes, just submit a PR.
+
+### Environment
+The project utilises NPM for dependency management and webpack as a build tool, with a couple of NPM scripts setup to help with development.
+
+When you first clone the project, run `npm install` from the project directory to get the baseline all squared away.
+
+#### NPM Scripts
+- `npm run dev` - Build the development environment files, this is `example.app.js` to the `docs` directory
+- `npm run watch` - The usual watch script to automatically build the `dev` environment
+- `npm run hot` - Runs a webpack dev server at `localhost:8080` from the `docs` directory
+- `npm run prod` - Builds the project out to the minified `charcount.min.js` in the `dist` directory
+
+#### Project Structure
+- `dist` - Stores assets for distribution
+- `docs` - Stores assets to be served up to GitHub pages and the local webpack dev server. Build ouput of `dev`, `hot` and `watch`
+- `legacy` - Stores the original jQuery library
+- `src` - Stores the source files for the project. This includes the entry point for the library itself `CharCount.js`, its `core` and its `helpers`. There are also example assets in there, `example.app.js` for implementation and `scss` (Sass) for styling
 
 ## Todo
 - Unit tests!
