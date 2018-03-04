@@ -1,6 +1,8 @@
 # CharCount
 A lightweight (~7KB min) ES6 library for dealing with character counts on text fields, providing events, live counters and more!
 
+![example usage](example.gif)
+
 An interactive preview can be found on the [GitHub page for this project]().
 
 The concept of the library is to define a state that the field is in dependent on where the field sits within the configured thresholds. The character count thresholds are seperated into 3 key targets; Warning, Danger and Expended. Warning is for "you're getting close!", Danger is for "for real, you are running out" and Expended is for "all used up!". When the field is empty an Empty state is declared, along with a similar Fine state being applied when the field sits between an Empty and Warning state.
