@@ -18,9 +18,9 @@ export default class CharCount {
         // Config
         // -----
 
-        warning = 25,
-        danger = 10,
-        limit = 100,
+        warningThreshold: warning = 25,
+        dangerThreshold: danger = 10,
+        limitThreshold: limit = 100,
         // Threshold values
         // TODO: Potentially look at percentages as well as fixed figures?
 
