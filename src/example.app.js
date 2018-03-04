@@ -7,7 +7,7 @@ import CharCount from './CharCount';
 
 window.charCountInstance = new CharCount({ // eslint-disable-line no-unused-vars
 
-    onFieldEmpty: (field) => {
+    onFieldEmpty: (field, count) => {
 
         console.log('onFieldEmpty');
 
@@ -15,7 +15,7 @@ window.charCountInstance = new CharCount({ // eslint-disable-line no-unused-vars
         // Reset Bootstrap form state
     },
 
-    onFieldFine: (field) => {
+    onFieldFine: (field, count) => {
 
         console.log('onFieldFine');
 
