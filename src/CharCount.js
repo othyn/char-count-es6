@@ -57,7 +57,7 @@ export default class CharCount {
     } = {}) {
 
         this.instances = [];
-        // Stores all active instances of the class
+        // Stores all active instances of the class if a DOM class is provided
 
         this.element = this.findElement(selector);
         // Initialisation depends on the outcome of the type of selector passed
@@ -192,14 +192,13 @@ export default class CharCount {
     }
 
     /**
-     * Initial handler of the event, mainly to pass the element object on to updateElementState
-     * @param  object   event   JS event
+     * Initial handler of the event
      * @return void
      */
-    handleInputEvent(event) {
+    handleInputEvent() {
 
         this.updateElementState();
-        // Hand off event element to calculate the remaining characters
+        // Update properties, trigger new states and fire events
     }
 
     /**
