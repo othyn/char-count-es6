@@ -82,35 +82,33 @@ export default class CharCount {
         this.onFieldExpended = onFieldExpended;
         // Register callbacks
 
-        // this.instances = {};
+        this.instances = [];
         // Stores all active instances of the class
-        // TODO: Implement when not singleton
 
-        this.bindFields();
-        // Bind the class to the defined DOM interaction classes
+        this.findElements();
+        // Start the process to bind the class onto the specified DOM element(s)
     }
 
     /**
-     * Binds listener events to the fields with the configured class
+     * Finds the elements to be bound to the class
      * @return void
      */
-    bindFields() {
+    findElements() {
 
         // Conditional assignments won't get passed eslint, event with "no-cond-assign" set
         // So unsure whether its good practice in JS. I just miss if (let ...) ...
 
-        if (document.getElementById(this.selector) !== null) {
+        if (this.selector && this.selector.nodeType === Node.ELEMENT_NODE) {
+
+            // Element passed, this usually means that the class has been initialised internally
+
+            this.bindElement(this.selector);
+
+        } else if (document.getElementById(this.selector) !== null) {
 
             // ID passed, go ahead and initialise this instance only against the requested element
 
-            let element = document.getElementById(this.selector);
-            // Grab the element in question
-
-            element.addEventListener('input', this.handleInputEvent.bind(this));
-            // Register the event listener to the DOM elements required
-
-            this.calculateRemainingCharacters(element);
-            // Calculate initial counts for each element
+            this.bindElement( document.getElementById(this.selector) );
 
         } else if (document.getElementsByClassName(this.selector).length !== 0) {
 
@@ -122,17 +120,31 @@ export default class CharCount {
 
             Array.from(elements, el => {
 
-                //this.instances.push(  );
-                // TODO: Factory for creating new instances?
-                // TODO: Implement when not singleton
+                this.instances.push( new CharCount({selector: el}) );
+                // TODO: Need to pass through parameters
 
             });
+            // Create a new instance for each element, storing the initialised in this instance
 
         } else {
 
             return console.warn('No elements found with supplied selector', this.selector);
         }
         // Determine what the instance needs to initialise as
+    }
+
+    /**
+     * Bind the required events onto the element / determine initial state
+     * @param  object   element   DOM element
+     * @return void
+     */
+    bindElement(element) {
+
+        element.addEventListener('input', this.handleInputEvent.bind(this));
+        // Register the event listener to the DOM elements required
+
+        this.calculateRemainingCharacters(element);
+        // Calculate initial counts for each element
     }
 
     /**
