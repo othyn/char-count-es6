@@ -155,3 +155,4 @@ Builds the project out to the minified `charcount.min.js` in the `dist` director
 
 ## Todo
 - Unit tests!
+- Automatic build, probably on Semaphore CI
