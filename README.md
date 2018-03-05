@@ -1,5 +1,8 @@
 # CharCount
-[![npm](https://img.shields.io/npm/v/char-count-es6.svg)](https://www.npmjs.com/package/char-count-es6)
+[![npm version](https://img.shields.io/npm/v/char-count-es6.svg)](https://www.npmjs.com/package/char-count-es6)
+[![npm downloads](https://img.shields.io/npm/dt/char-count-es6.svg)](https://www.npmjs.com/package/char-count-es6)
+[![Github file size](https://img.shields.io/github/size/othyn/char-count-es6/dist/charcount.min.js.svg)](https://github.com/othyn/char-count-es6/blob/master/dist/charcount.min.js)
+[![GitHub license](https://img.shields.io/github/license/othyn/char-count-es6.svg)](https://github.com/othyn/char-count-es6/blob/master/LICENSE)
 
 <p align="center"><img src="example.gif" alt="example usage"/></p>
 
