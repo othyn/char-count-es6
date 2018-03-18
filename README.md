@@ -3,6 +3,10 @@
 [![npm downloads](https://img.shields.io/npm/dt/char-count-es6.svg)](https://www.npmjs.com/package/char-count-es6)
 [![Github file size](https://img.shields.io/github/size/othyn/char-count-es6/dist/charcount.min.js.svg)](https://github.com/othyn/char-count-es6/blob/master/dist/charcount.min.js)
 [![GitHub license](https://img.shields.io/github/license/othyn/char-count-es6.svg)](https://github.com/othyn/char-count-es6/blob/master/LICENSE)
+![Blazing Fast](https://img.shields.io/badge/🔥-Blazing%20Fast-red.svg)
+![Just Works](https://img.shields.io/badge/🦄-Just%20Works-cc00cc.svg)
+![Extremely Lightweight](https://img.shields.io/badge/🦋-Extremely%20Lightweight-7799cc.svg)
+![Production Ready](https://img.shields.io/badge/👌-Production%20Ready-00ddcc.svg)
 
 <p align="center"><img src="example.gif" alt="example usage"/></p>
 
@@ -119,7 +123,7 @@ Fired when the remainder is all used up!
 
 For example implementation of this, see `src/example.app.js`
 
-## Contributing & Development
+## Contributing & Development <img align="right" src="https://img.shields.io/badge/%F0%9F%A4%B7-Production%20Ready%E2%80%90ish-691d78.svg" alt="Production Ready-ish"/>
 If you wish to contribute, please just fork and play around! If you have any changes, just submit a PR.
 
 ### Environment
