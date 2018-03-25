@@ -3,6 +3,8 @@
 [![npm downloads](https://img.shields.io/npm/dt/char-count-es6.svg)](https://www.npmjs.com/package/char-count-es6)
 [![Github file size](https://img.shields.io/github/size/othyn/char-count-es6/dist/charcount.min.js.svg)](https://github.com/othyn/char-count-es6/blob/master/dist/charcount.min.js)
 [![GitHub license](https://img.shields.io/github/license/othyn/char-count-es6.svg)](https://github.com/othyn/char-count-es6/blob/master/LICENSE)
+[![Build Status](https://semaphoreci.com/api/v1/othyn/char-count-es6/branches/master/badge.svg)](https://semaphoreci.com/othyn/char-count-es6)
+
 ![Blazing Fast](https://img.shields.io/badge/🔥-Blazing%20Fast-red.svg)
 ![Just Works](https://img.shields.io/badge/🦄-Just%20Works-cc00cc.svg)
 ![Extremely Lightweight](https://img.shields.io/badge/🦋-Extremely%20Lightweight-7799cc.svg)
