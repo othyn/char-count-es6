@@ -9,7 +9,7 @@
   <img src="example.gif" alt="example usage"/>
 </p>
 
-A ![Blazing Fast](https://img.shields.io/badge/🔥-Blazing%20Fast-red.svg), ![Extremely Lightweight](https://img.shields.io/badge/🦋-Extremely%20Lightweight-7799cc.svg) (~7KB min) ES6 library for dealing with character counts on text fields, providing events, live counters and more! ![Blazing Fast](https://img.shields.io/badge/🔥-Blazing%20Fast-red.svg) and ![Just Works](https://img.shields.io/badge/🦄-Just%20Works-cc00cc.svg) - it's always ![Production Ready](https://img.shields.io/badge/👌-Production%20Ready-00ddcc.svg)!
+A lightweight (~7KB min) ES6 library for dealing with character counts on text fields, providing events, live counters and more!
 
 An interactive preview can be found on the [GitHub page for this project](https://othyn.github.io/char-count-es6/).
 
