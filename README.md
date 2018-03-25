@@ -4,6 +4,9 @@
 [![Github file size](https://img.shields.io/github/size/othyn/char-count-es6/dist/charcount.min.js.svg)](https://github.com/othyn/char-count-es6/blob/master/dist/charcount.min.js)
 [![GitHub license](https://img.shields.io/github/license/othyn/char-count-es6.svg)](https://github.com/othyn/char-count-es6/blob/master/LICENSE)
 [![Build Status](https://semaphoreci.com/api/v1/othyn/char-count-es6/branches/master/badge.svg)](https://semaphoreci.com/othyn/char-count-es6)
+![Blazing Fast](https://img.shields.io/badge/🔥-Blazing%20Fast-red.svg)
+![Extremely Lightweight](https://img.shields.io/badge/🦋-Extremely%20Lightweight-7799cc.svg)
+![Just Works](https://img.shields.io/badge/🦄-Just%20Works-cc00cc.svg)
 
 <p align="center">
   <img src="example.gif" alt="example usage"/>
